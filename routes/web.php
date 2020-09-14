@@ -27,3 +27,7 @@ Route::get('masuk', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+use App\Http\Controllers\EmailController;
+
+Route::get('/send_email', [EmailController::class, 'send_email']);
