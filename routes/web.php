@@ -32,3 +32,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 use App\Http\Controllers\EmailController;
 
 Route::get('/send_email', [EmailController::class, 'send_email']);
+
+use App\Http\Controllers\JobController;
+
+Route::get('/enqueue', [JobController::class, 'enqueue']);
