@@ -36,3 +36,15 @@ Route::get('/send_email', [EmailController::class, 'send_email']);
 use App\Http\Controllers\JobController;
 
 Route::get('/enqueue', [JobController::class, 'enqueue']);
+
+use App\Http\Controllers\FormController;
+
+Route::get('/json', [FormController::class, 'json']);
+Route::post('/store-json', [FormController::class, 'store_json']);
+
+Route::get('/dynamic', [FormController::class, 'dynamic']);
+Route::post('/store-dynamic', [FormController::class, 'store_dynamic'])->name('store-dynamic');;
+
+Route::get('/form_view', [FormController::class, 'form_view']);
+
+
