@@ -249,7 +249,7 @@ aside.left-panel {
 
 .navbar-nav li span.count {
   background: #a9d86e;
-  border-radius: 50%;
+   border-radius: 50%;
   color: #fff;
   font-family: 'Open Sans';
   font-size: 9px;
@@ -371,7 +371,7 @@ header.fixed-top {
 
 .menutoggle {
   background: #e74c3c;
-  border-radius: 50%;
+   border-radius: 50%;
   color: #fff !important;
   cursor: pointer;
   font-size: 18px;
@@ -457,7 +457,7 @@ header .form-inline {
     .header-left .dropdown .dropdown-toggle:after {
       display: none; }
     .header-left .dropdown .dropdown-toggle .count {
-      border-radius: 50%;
+       border-radius: 50%;
       color: #fff;
       font-size: 11px;
       height: 15px;
@@ -553,7 +553,7 @@ header .form-inline {
     text-transform: uppercase; }
   .user-area .count {
     background: #d9534f;
-    border-radius: 50%;
+     border-radius: 50%;
     color: #fff;
     font-family: 'Open Sans';
     font-size: 9px;

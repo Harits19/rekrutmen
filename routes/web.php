@@ -21,6 +21,10 @@ Route::get('beranda', function () {
 	return view('beranda');
 });
 
+Route::get('homepage', function () {
+	return view('homepage.homepage');
+});
+
 Route::get('masuk', function () {
 	return view('masuk');
 });

@@ -2513,7 +2513,7 @@ tbody.collapse.show {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='%23fff' d='M0 2h4'/%3E%3C/svg%3E"); }
 
 .custom-radio .custom-control-label::before {
-  border-radius: 50%; }
+   border-radius: 50%; }
 .custom-radio .custom-control-input:checked ~ .custom-control-label::before {
   background-color: #007bff; }
 .custom-radio .custom-control-input:checked ~ .custom-control-label::after {

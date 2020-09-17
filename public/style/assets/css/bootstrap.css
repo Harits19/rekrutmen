@@ -3596,7 +3596,7 @@ tbody.collapse.show {
 }
 
 .custom-radio .custom-control-label::before {
-  border-radius: 50%;
+   border-radius: 50%;
 }
 
 .custom-radio .custom-control-input:checked ~ .custom-control-label::before {
