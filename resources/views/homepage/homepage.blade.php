@@ -57,10 +57,10 @@
         <a href="#default" class="logo">CompanyLogo</a>
     </div> -->
     <div id="colorlib-page">
-        <!-- <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a> -->
+        <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
         <aside id="colorlib-aside" role="complementary" class="js-fullheight">
             <div class="colorlib-header">
-                <h1>E-Recruitmen Anggota Organisasi</h1>
+                <h1>E-Recruitment Anggota Organisasi</h1>
                 <h5>Universitas Brawijaya</h5>
                 <br>
                 <nav id="colorlib-main-menu" role="navigation">
@@ -91,7 +91,8 @@
                     Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
                 </p> -->
             </div>
-        </aside> END COLORLIB-ASIDE
+        </aside>
+        <!-- END COLORLIB-ASIDE -->
         <div id="colorlib-main">
             <section class="ftco-section ftco-no-pt ftco-no-pb">
                 <div class="container">
@@ -99,23 +100,26 @@
                         <div class="col-xl-8 py-5 px-md-5">
                             <div class="row pt-md-4">
 
+                                @foreach($blog as $b)
                                 <div class="col-md-12">
                                     <div class="blog-entry ftco-animate d-md-flex">
-                                        <a href="{{ url('andrea/single.html') }}" class="img img-2" style="background-image: url({{ url('andrea/images/image_1.jpg') }});"></a>
+                                        <img href="/detail/{{ $b->id }}" class="img img-2" src="{{ url('andrea/images/image_1.jpg') }}"></img>
                                         <div class="text text-2 pl-md-4">
-                                            <h3 class="mb-2"><a href="{{ url('andrea/single.html') }}">Staf Muda RKIM 2021</a></h3>
+                                            <h3 class="mb-2"><a href="/detail/{{ $b->id }}">{{ $b->title }}</a></h3>
                                             <div class="meta-wrap">
                                                 <p class="meta">
                                                     <span><i class="icon-calendar mr-2"></i>June 28, 2019</span>
-                                                    <span><a href="{{ url('andrea/single.html') }}"><i class="icon-folder-o mr-2"></i>Travel</a></span>
+                                                    <span><a href="/detail/{{ $b->id }}"><i class="icon-folder-o mr-2"></i>Travel</a></span>
                                                     <span><i class="icon-comment2 mr-2"></i>5 Comment</span>
                                                 </p>
                                             </div>
-                                            <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                                            <p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+                                            <p class="mb-4">{{ $b->id }}</p>
+                                            <p><a href="/detail/{{ $b->id }}" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
+
 
                                 <!-- <div class="col-md-12">
                                     <div class="blog-entry ftco-animate d-md-flex">
@@ -449,6 +453,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="js/google-map.js"></script>
     <script src="js/main.js"></script> -->
+
     <script src="{{ asset('andrea/js/jquery.min.js') }}"></script>
     <script src="{{ asset('andrea/js/jquery-migrate-3.0.1.min.js') }}"></script>
     <script src="{{ asset('andrea/js/popper.min.js') }}"></script>
@@ -464,7 +469,6 @@
     <script src="{{ asset('andrea/js/google-map.js') }}"></script>
     <script src="{{ asset('andrea/js/main.js') }}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-
 
 
 

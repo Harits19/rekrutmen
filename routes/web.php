@@ -21,9 +21,7 @@ Route::get('beranda', function () {
 	return view('beranda');
 });
 
-Route::get('homepage', function () {
-	return view('homepage.homepage');
-});
+
 
 Route::get('masuk', function () {
 	return view('masuk');
@@ -40,3 +38,14 @@ Route::get('/send_email', [EmailController::class, 'send_email']);
 use App\Http\Controllers\JobController;
 
 Route::get('/enqueue', [JobController::class, 'enqueue']);
+
+use App\Http\Controllers\HomepageController;
+
+Route::get('/homepage', [HomepageController::class, 'index']);
+Route::get('/detail/{id}', [HomepageController::class, 'detail']);
+Route::get('/form/{id}', [HomepageController::class, 'form']);
+
+// Route::get('form', function () {
+// 	return view('homepage.form_pendaftaran');
+// });
+
