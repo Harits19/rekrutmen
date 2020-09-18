@@ -17,9 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('beranda', function () {
-	return view('beranda');
-});
+// Route::get('beranda', function () {
+// 	return view('admin.beranda');
+// });
 
 
 
@@ -58,4 +58,11 @@ Route::post('/store-dynamic', [FormController::class, 'store_dynamic'])->name('s
 
 Route::get('/form_view', [FormController::class, 'form_view']);
 
+
+use App\Http\Controllers\AdminController;
+
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+Route::get('/admin/form', [AdminController::class, 'create_form']);
+
+// Route::post('/store-json', [AdminController::class, 'store_json']);
 

@@ -28,21 +28,21 @@
 
       <form id="laravel_json" method="post" action="{{url('store-dynamic')}}">
         @csrf
-        {{-- <div class="form-group">
-                      <label for="formGroupExampleInput">Name</label>
-                      <input type="text" name="name" class="form-control" id="formGroupExampleInput" placeholder="Please enter name">
-                    </div>
-                    <div class="form-group">
-                      <label for="email">Email Id</label>
-                      <input type="text" name="email" class="form-control" id="email" placeholder="Please enter email id">
-                    </div>
-                    <div class="form-group">
-                      <label for="mobile_number">Mobile Number</label>
-                      <input type="text" name="mobile_number" class="form-control" id="mobile_number" placeholder="Please enter mobile number">
-                    </div>
-                    <div class="form-group">
-                     <button type="submit" class="btn btn-success">Submit</button>
-                    </div> --}}
+        <div class="form-group">
+          <label for="formGroupExampleInput">Name</label>
+          <input type="text" name="name" class="form-control" id="formGroupExampleInput" placeholder="Please enter name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Id</label>
+          <input type="text" name="email" class="form-control" id="email" placeholder="Please enter email id">
+        </div>
+        <div class="form-group">
+          <label for="mobile_number">Mobile Number</label>
+          <input type="text" name="mobile_number" class="form-control" id="mobile_number" placeholder="Please enter mobile number">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Submit</button>
+        </div>
 
         <table class="table table-bordered" id="dynamic_field">
           <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td>
@@ -63,19 +63,19 @@
     <br />
     <h2 align="center">Dynamically Add or Remove input fields in PHP with JQuery</h2>
     <div class="form-group">
-      {{-- <form id="myForm" method="POST" action="./exam_coordinates">
-                    <label for="question"> Question </label> <br>
-                    <input class="champ" type="textarea" name="question" id="question" value=""><br><br>
-                    <label for="ans"> Answers </label> <br>
-                    <input type="checkbox" name="ans1" id="ans1" values="" />
-                    <input type="text" name="ans1" id="ans1" value=""><br>
-                    <input type="checkbox" name="ans2" id="ans2" />
-                    <input type="text" name="ans2" id="ans2" value=""><br>
-                    <div id="more_answers"></div>
-                    <br>
-                    <button id="add_button">Add proposition</button> <br><br><br>
-                    <input type="submit" value="submit">
-                </form> --}}
+      <form id="myForm" method="POST" action="./exam_coordinates">
+        <label for="question"> Question </label> <br>
+        <input class="champ" type="textarea" name="question" id="question" value=""><br><br>
+        <label for="ans"> Answers </label> <br>
+        <input type="checkbox" name="ans1" id="ans1" values="" />
+        <input type="text" name="ans1" id="ans1" value=""><br>
+        <input type="checkbox" name="ans2" id="ans2" />
+        <input type="text" name="ans2" id="ans2" value=""><br>
+        <div id="more_answers"></div>
+        <br>
+        <button id="add_button">Add proposition</button> <br><br><br>
+        <input type="submit" value="submit">
+      </form>
       <form method="GET" action="foo.php" onChange="getHouseModel">
         <select name="house_model" id="house_model">
           <option value="">------</option>
@@ -84,7 +84,7 @@
           <option value="Model 3">Model 3</option>
         </select>
         <input type="text" name="label" id="label" value=""><br>
-        {{-- <input type="text" name="custom_label" id="custom_label" placeholder="Masukkan field" class="form-control name_list" /> --}}
+        <input type="text" name="custom_label" id="custom_label" placeholder="Masukkan field" class="form-control name_list" />
 
       </form>
     </div>

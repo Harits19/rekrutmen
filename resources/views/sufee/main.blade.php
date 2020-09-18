@@ -1,12 +1,12 @@
 <!doctype html>
 
 <head>
-    @include('head')
+    @include('sufee.head')
     <title>@yield('title')</title>
 </head>
 
 <body>
-    @include('script')
+    @include('sufee.script')
 
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">

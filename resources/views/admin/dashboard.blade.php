@@ -1,4 +1,4 @@
-@extends('main')
+@extends('sufee.main')
 @section('title', 'Dashboard')
 
 @section('breadcrumbs')

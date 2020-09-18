@@ -8,7 +8,7 @@
 
 <head>    
     <title>Login</title>
-    @include('head')
+    @include('sufee.head')
 </head>
 
 <body class="bg-dark">
@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>
-    @include('script')
+    @include('sufee.script')
 
 </body>
 
