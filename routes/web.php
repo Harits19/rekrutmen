@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,24 +37,21 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
-use App\Http\Controllers\EmailController;
 
 Route::get('/send_email', [EmailController::class, 'send_email']);
 
-use App\Http\Controllers\JobController;
 
 Route::get('/enqueue', [JobController::class, 'enqueue']);
 
-use App\Http\Controllers\HomepageController;
 
 Route::get('/homepage', [HomepageController::class, 'index']);
 Route::get('/detail/{id}', [HomepageController::class, 'detail']);
 Route::get('/form/{id}', [HomepageController::class, 'form']);
+Route::post('/store_data', [HomepageController::class, 'store_data']);
 
 // Route::get('form', function () {
 // 	return view('homepage.form_pendaftaran');
 // });
-use App\Http\Controllers\FormController;
 
 Route::get('/json', [FormController::class, 'json']);
 Route::post('/store-json', [FormController::class, 'store_json']);
@@ -59,10 +62,11 @@ Route::post('/store-dynamic', [FormController::class, 'store_dynamic'])->name('s
 Route::get('/form_view', [FormController::class, 'form_view']);
 
 
-use App\Http\Controllers\AdminController;
 
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 Route::get('/admin/form', [AdminController::class, 'create_form']);
+
+Route::post('/admin/form/store', [AdminController::class, 'store_form']);
 
 // Route::post('/store-json', [AdminController::class, 'store_json']);
 

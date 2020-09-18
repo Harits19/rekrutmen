@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-class Form extends Model
+class Pendaftar extends Model
 {
     use HasFactory;
-    protected $table = 'forms';
+    protected $table = 'pendaftar';
     protected $fillable = ['data'];
+
 }

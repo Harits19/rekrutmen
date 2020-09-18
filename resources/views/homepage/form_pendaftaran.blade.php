@@ -11,57 +11,38 @@
         <small> Isilah Data Dibawah Ini </small> <strong>Dengan Benar</strong>
     </div>
     <div class="row pt-md-4">
+        <form method="post" action="/store_data">
 
-        <div class="card-body card-block">
-            <div class="form-group">
-                <label class=" form-control-label">Date input</label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                    <input class="form-control">
+            <div class="card-body card-block">
+                <div class="form-group">
+
+                    <div class="input-group">
+                        <input name="data[]" value="halo" class="form-control">
+                    </div>
                 </div>
-                <small class="form-text text-muted">ex. 99/99/9999</small>
-            </div>
-            <div class="form-group">
-                <label class=" form-control-label">Phone input</label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                    <input class="form-control">
+                @foreach($form as $p)
+                @foreach($p->data as $d)
+
+                <div class="form-group">
+                    <label class=" form-control-label">{{ $d }}</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input id="data" name="data[]" class="form-control">
+                    </div>
+                    <small class="form-text text-muted">ex. 99/99/9999</small>
                 </div>
-                <small class="form-text text-muted">ex. (999) 999-9999</small>
-            </div>
-            <div class="form-group">
-                <label class=" form-control-label">Taxpayer Identification Numbers</label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-usd"></i></div>
-                    <input class="form-control">
+                @endforeach
+                @endforeach
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </div>
-                <small class="form-text text-muted">ex. 99-9999999</small>
+
+
+
+
             </div>
-            <div class="form-group">
-                <label class=" form-control-label">Social Security Number</label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-male"></i></div>
-                    <input class="form-control">
-                </div>
-                <small class="form-text text-muted">ex. 999-99-9999</small>
-            </div>
-            <div class="form-group">
-                <label class=" form-control-label">Eye Script</label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-asterisk"></i></div>
-                    <input class="form-control">
-                </div>
-                <small class="form-text text-muted">ex. ~9.99 ~9.99 999</small>
-            </div>
-            <div class="form-group">
-                <label class=" form-control-label">Credit Card Number</label>
-                <div class="input-group">
-                    <div class="input-group-addon"><i class="fa fa-credit-card"></i></div>
-                    <input class="form-control">
-                </div>
-                <small class="form-text text-muted">ex. 9999 9999 9999 9999</small>
-            </div>
-        </div>
+        </form>
+
     </div>
     <!-- <div class="row d-flex mb-5 contact-info">
         <div class="col-md-12 mb-4">

@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Form;
+use App\Models\Pendaftar;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
+
+
 
 class HomepageController extends Controller
 {
@@ -25,6 +30,36 @@ class HomepageController extends Controller
     public function form($id)
     {
         $blog = Blog::find($id);
-        return view('homepage.form_pendaftaran', ['blog' => $blog]);
+        $form = Form::find(21);     
+
+        $form = json_decode( $form->data);
+        // $form =$form->id;
+
+
+        return view('homepage.form_pendaftaran', ['blog' => $blog], ['form' => $form]);
+    }
+
+    // public function store_data(Request $request)
+    // {
+
+    //     $data = array($request->only('data'));
+    //     $test['data'] = json_encode($data);
+    //     // $test['data'] = implode(",", $data);
+    //     Pendaftar::insert($test);
+    //     return redirect('/');
+    // }
+
+    public function store_data(Request $request)
+    {
+
+
+        
+        $data = array($request->only('data'));
+        
+        $test['data'] = json_encode($data);
+        // $test['data'] = implode(",", $data);
+        Pendaftar::insert($test);
+        
+        return redirect('/admin/dashboard');
     }
 }
