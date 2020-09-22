@@ -67,6 +67,7 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 Route::get('/admin/form', [AdminController::class, 'create_form']);
 
 Route::post('/admin/form/store', [AdminController::class, 'store_form']);
+Route::post('/admin/send', [AdminController::class, 'send_message']);
 
 // Route::post('/store-json', [AdminController::class, 'store_json']);
 
