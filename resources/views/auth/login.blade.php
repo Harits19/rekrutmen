@@ -17,17 +17,25 @@
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">
-                <div class="login-logo">
+                <!-- <div class="login-logo">
                     <a href="index.html">
                         <img class="align-content" src="images/logo.png" alt="">
                     </a>
-                </div>
+                </div> -->
+
                 <div class="login-form">
-                    @if (session('status'))
-                    <div class="mb-4 font-medium text-sm text-green-600">
-                        {{ session('status') }}
+                    <div>
+                        @if (session('status'))
+                        <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                            <span class="badge badge-pill badge-success">Success</span>
+                            {{ session('status') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        @endif
                     </div>
-                    @endif
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group">

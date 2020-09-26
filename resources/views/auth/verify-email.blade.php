@@ -25,15 +25,27 @@
                 </div> -->
 
                 <div class="login-form">
-                    <div class="mb-4 text-sm text-gray-600">
+                    <!-- <div class="mb-4 text-sm text-gray-600">
                         {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+                    </div> -->
+
+                    <div>
+                        @if (session('status') == 'verification-link-sent')
+                        <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                            <span class="badge badge-pill badge-success">Success</span>
+                            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        @endif
                     </div>
 
-                    @if (session('status') == 'verification-link-sent')
+                    <!-- @if (session('status') == 'verification-link-sent')
                     <div class="mb-4 font-medium text-sm text-green-600">
                         {{ __('A new verification link has been sent to the email address you provided during registration.') }}
                     </div>
-                    @endif
+                    @endif -->
 
                     <form method="POST" action="/email/verification-notification">
                         @csrf

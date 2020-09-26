@@ -13,17 +13,29 @@
 
 <body class="bg-dark">
 
-    <x-jet-validation-errors class="mb-4" />
+    <!-- Untuk error seperti email telah digunakan -->
+    <!-- <x-jet-validation-errors class="mb-4" /> -->
 
 
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">
-                <div class="login-logo">
+                <!-- <div class="login-logo">
                     <a href="index.html">
                         <img class="align-content" src="images/logo.png" alt="">
                     </a>
+                </div> -->
+
+                <div>
+                    <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                        <span class="badge badge-pill badge-success">Success</span>
+                        <x-jet-validation-errors class="mb-4" />
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
                 </div>
+                
                 <div class="login-form">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf

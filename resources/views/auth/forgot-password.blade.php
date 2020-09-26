@@ -35,18 +35,19 @@
                     </a>
                 </div> -->
 
-                <div>
-                    @if (session('status'))
-                    <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
-                        <span class="badge badge-pill badge-success">Success</span>
-                        {{ session('status') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    @endif
-                </div>
+
                 <div class="login-form">
+                    <div>
+                        @if (session('status'))
+                        <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                            <span class="badge badge-pill badge-success">Success</span>
+                            {{ session('status') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        @endif
+                    </div>
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
 
