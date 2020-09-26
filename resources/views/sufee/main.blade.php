@@ -73,8 +73,11 @@
                             <img class="user-avatar rounded-circle" src="{{ asset('style/images/admin.jpg') }}">
                         </a>
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-                            <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                            <button class="btn btn-link btn-sm" href="/"><i class="fa fa-link"></i> Setting</button>
+                            <form id="logout_form" method="POST" action="/logout">
+                                @csrf
+                                <button class="btn btn-link btn-sm" type="submit" id="logout"><i class="fa fa-power-off"></i> Logout</button>
+                            </form>
                         </div>
                     </div>
 
@@ -102,6 +105,11 @@
             </div>
 
         </header><!-- /header -->
+        <script>
+            // document.getElementById("logout").onclick = function() {
+            //     document.getElementById("logout_form").submit();
+            // };
+        </script>
 
         @yield('breadcrumbs')
         @yield('content')

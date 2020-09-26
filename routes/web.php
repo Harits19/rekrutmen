@@ -30,8 +30,9 @@ Route::get('/', function () {
 
 
 Route::get('masuk', function () {
-	return view('masuk');
+    return view('masuk');
 });
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -63,11 +64,13 @@ Route::get('/form_view', [FormController::class, 'form_view']);
 
 
 
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+// Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+// dengan midleware
+Route::middleware(['auth:sanctum', 'verified'])->get('/admin/dashboard', [AdminController::class, 'dashboard']);
+
 Route::get('/admin/form', [AdminController::class, 'create_form']);
 
 Route::post('/admin/form/store', [AdminController::class, 'store_form']);
 Route::post('/admin/send', [AdminController::class, 'send_message']);
 
 // Route::post('/store-json', [AdminController::class, 'store_json']);
-
