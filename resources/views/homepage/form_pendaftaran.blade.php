@@ -16,12 +16,8 @@
             <div class="card-body card-block">
                 <div class="form-group">
 
-                    <div class="input-group">
-                        <input name="data[]" value="halo" class="form-control">
-                    </div>
                 </div>
-                @foreach($form as $p)
-                @foreach($p->data as $d)
+                @foreach($form->data as $d)
 
                 <div class="form-group">
                     <label class=" form-control-label">{{ $d }}</label>
@@ -31,7 +27,6 @@
                     </div>
                     <small class="form-text text-muted">ex. 99/99/9999</small>
                 </div>
-                @endforeach
                 @endforeach
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Submit</button>

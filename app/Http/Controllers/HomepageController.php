@@ -30,7 +30,7 @@ class HomepageController extends Controller
     public function form($id)
     {
         $blog = Blog::find($id);
-        $form = Form::find(21);     
+        $form = Form::find(28);     
 
         $form = json_decode( $form->data);
         // $form =$form->id;
@@ -55,6 +55,10 @@ class HomepageController extends Controller
 
         
         $data = array($request->only('data'));
+
+        $test['nama'] = "Uji Coba";
+        $test['no_hp'] = "083840493135";
+        $test['email'] = "harits.abdullah19@gmail.com";
         
         $test['data'] = json_encode($data);
         // $test['data'] = implode(",", $data);

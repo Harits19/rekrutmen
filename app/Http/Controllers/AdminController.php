@@ -64,9 +64,14 @@ class AdminController extends Controller
 
 
         $test['token'] = time();
-        $data = array($request->only('data'));
+        $test['nama'] = "Uji Coba";
+        $data = $request->only('data');
 
+        // dengan json
         $test['data'] = json_encode($data);
+
+        // $test['data'] = array($data);
+        print_r($test['data']);
         // $test['data'] = implode(",", $data);
         Form::insert($test);
         // return Redirect::to("dynamic");
