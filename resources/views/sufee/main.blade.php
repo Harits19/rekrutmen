@@ -21,13 +21,13 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href=""> <i class="menu-icon fa fa-dashboard"></i>Home </a>
+                        <a href="/admin/dashboard"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
                     <li>
-                        <a href=""> <i class="menu-icon fa fa-puzzle-piece"></i>Jenjang </a>
+                        <a href="/admin/rekrutmen"> <i class="menu-icon fa fa-puzzle-piece"></i>Rekrutmen </a>
                     </li>
                     <li>
-                        <a href=""> <i class="menu-icon fa fa-puzzle-piece"></i>Program </a>
+                        <a href="/admin/pendaftar"> <i class="menu-icon fa fa-puzzle-piece"></i>Pendaftar </a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->

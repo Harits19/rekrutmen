@@ -1,17 +1,27 @@
 <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+
     <div class="colorlib-header">
-        <h1>E-Recruitment Anggota Organisasi</h1>
+
+        <h1>Informasi Rekrutmen Organisasi</h1>
         <h5>Universitas Brawijaya</h5>
         <br>
         <nav id="colorlib-main-menu" role="navigation">
             <ul>
-                <li class="colorlib-active"><a href="/homepage">Home</a></li>
+                <!-- <li class="colorlib-active"><a href="/homepage">Beranda</a></li> -->
+                <li><a href="/">Beranda</a></li>
+                <li><a href="/organisasi">Organisasi</a></li>
                 <li><a href="/login">Login</a></li>
                 <li><a href="/register">Register</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                
             </ul>
         </nav>
+        <br>
+            <form action="#" class="search-form">
+                <div class="form-group">
+                    <span class="icon icon-search"></span>
+                    <input type="text" class="form-control" placeholder="Cari Informasi">
+                </div>
+            </form>
         <!-- <div class="mb-4">
                     <h3>Subscribe for newsletter</h3>
                     <form action="#" class="colorlib-subscribe-form">
@@ -31,4 +41,5 @@
                     Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
                 </p> -->
     </div>
+
 </aside>

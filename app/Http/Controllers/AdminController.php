@@ -20,8 +20,49 @@ class AdminController extends Controller
     {
         $pendaftar = Pendaftar::All();
         $form = Form::find(20);
-        $form->data = json_decode($form->data);
+        // $form->data = json_decode($form->data);
         return view('admin.dashboard', ['pendaftar' => $pendaftar], ['form' => $form]);
+    }
+
+    public function rekrutmen()
+    {
+        // $pendaftar = Pendaftar::All();
+        // $form = Form::find(20);
+        // $form->data = json_decode($form->data);
+        return view('admin.rekrutmen');
+    }
+
+    public function tambah()
+    {
+        // $pendaftar = Pendaftar::All();
+        // $form = Form::find(20);
+        // $form->data = json_decode($form->data);
+        return view('admin.tambah-rekrutmen');
+    }
+
+    public function pendaftar()
+    {
+        // $pendaftar = Pendaftar::All();
+        // $form = Form::find(20);
+        // $form->data = json_decode($form->data);
+        return view('admin.pendaftar');
+    }
+
+    public function list($id)
+    {
+        // $pendaftar = Pendaftar::All();
+        // $form = Form::find(20);
+        // $form->data = json_decode($form->data);
+        return view('admin.list-pendaftar');
+    }
+
+    public function pemberitahuan()
+    {
+        // $pendaftar = Pendaftar::All();
+        // $form = Form::find(20);
+        // $form->data = json_decode($form->data);
+        return view('admin.kirim-pemberitahuan-pendaftar');
+
     }
 
     public function create_form()

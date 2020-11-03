@@ -17,7 +17,7 @@
                 <div class="container">
                     <div class="row d-flex">
                         @yield('content')
-                        @include('andrea.sidebar_right')
+                        
                         
                     </div>
 

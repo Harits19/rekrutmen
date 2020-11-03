@@ -1,74 +1,50 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="">
-<!--<![endif]-->
+@extends('andrea.main')
+@section('title', 'Reset Password')
 
-<head>
-    <title>Login</title>
-    @include('sufee.head')
-</head>
-
-<body class="bg-dark">
-    <!-- @if (session('status'))
+@section('content')
+<div class="col-xl-8 py-5 px-md-5">
+    <h2 class="h3">Reset Password</h2>
+    <h6>Halaman reset password untuk organisasi</h6>
+    <br>
+    @if (session('status'))
     <div class="mb-4 font-medium text-sm text-green-600">
         {{ session('status') }}
     </div>
-    @endif -->
+    @endif
 
+    <x-jet-validation-errors class="mb-4" />
 
+    <div class="row pt-md-4">
 
-
-
-    <!-- <x-jet-validation-errors class="mb-4" /> -->
-
-
-    <div class="sufee-login d-flex align-content-center flex-wrap">
-
-        <div class="container">
-            <div class="login-content">
-                <!-- <div class="login-logo">
-                    <a href="index.html">
-                        <img class="align-content" src="images/logo.png" alt="">
-                    </a>
-                </div> -->
-
-
-                <div class="login-form">
-                    <div>
-                        @if (session('status'))
-                        <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
-                            <span class="badge badge-pill badge-success">Success</span>
-                            {{ session('status') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        @endif
-                    </div>
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
-
-                        <div class="form-group">
-                            <label>Email address</label>
-                            <input class="form-control" placeholder="Email" type="email" name="email" :value="old('email')" required autofocus>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Send</button>
-
-                        <div class="register-link m-t-15 text-center">
-                            <p>Already have account ? <a href="{{ route('login') }}"> Sign in</a></p>
-                        </div>
-                    </form>
+        <form method="POST" action="{{ route('password.email') }}">
+            @csrf
+            <div class="card-body card-block">
+                <div>
+                    <small> Isilah Data Dibawah Ini </small> <strong>Dengan Benar</strong>
                 </div>
 
+                <div class="form-group">
+                    <label class=" form-control-label">Email</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"></div>
+                        <input required type="email" id="email" name="email" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Reset Password</button>
+                </div>
 
             </div>
-        </div>
+        </form>
+
     </div>
-    @include('sufee.script')
 
-</body>
 
-</html>
+
+    <div class="col-lg-6 d-flex">
+        <div id="map" class="bg-light"></div>
+    </div>
+</div>
+
+@endsection

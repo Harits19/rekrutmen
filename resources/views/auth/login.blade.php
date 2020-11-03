@@ -1,92 +1,75 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="">
-<!--<![endif]-->
+@extends('andrea.main')
+@section('title', 'Login')
 
-<head>
-    <title>Login</title>
-    @include('sufee.head')
-</head>
+@section('content')
+<div class="col-xl-8 py-5 px-md-5">
+    <h2 class="h3">Login</h2>
+    <h6>Halaman login untuk organisasi</h6>
+    <br>
+    @if (session('status'))
+    <div class="mb-4 font-medium text-sm text-green-600">
+        {{ session('status') }}
+    </div>
+    @endif
 
-<body class="bg-dark">
+    <x-jet-validation-errors class="mb-4" />
+    <div class="row pt-md-4">
 
-
-    <div class="sufee-login d-flex align-content-center flex-wrap">
-        <div class="container">
-            <div class="login-content">
-                <!-- <div class="login-logo">
-                    <a href="index.html">
-                        <img class="align-content" src="images/logo.png" alt="">
-                    </a>
-                </div> -->
-
-                <div class="login-form">
-                    <div>
-                        @if (session('status'))
-                        <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
-                            <span class="badge badge-pill badge-success">Success</span>
-                            {{ session('status') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        @endif
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <div class="card-body card-block">
+                <div>
+                    <small> Isilah Data Dibawah Ini </small> <strong>Dengan Benar</strong>
+                </div>
+                @if (session('status'))
+                <div class="mb-4 font-medium text-sm text-green-600">
+                    {{ session('status') }}
+                </div>
+                @endif
+                <div class="form-group">
+                    <label class=" form-control-label">Email</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"></div>
+                        <input required type="email" id="email" name="email" class="form-control">
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class=" form-control-label">Password</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"></div>
+                        <input required type="password" id="password" name="password" class="form-control">
+                    </div>
+                </div>
 
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-                        <div class="form-group">
-                            <label>Email address</label>
-                            <input type="email" name="email" class="form-control" placeholder="Email" required autofocus>
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" class="form-control" placeholder="Password" name="password" required autocomplete="current-password">
-                        </div>
+                <div class="checkbox">
 
-                        <!-- <div>
-                            <x-jet-label value="Email" />
-                            <x-jet-input class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-                        </div>
-
-                        <div class="mt-4">
-                            <x-jet-label value="Password" />
-                            <x-jet-input class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-                        </div> -->
-
-                        <div class="checkbox">
-                            <!-- <label>
-                                <input type="checkbox" name="remember">
-                                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                            </label> -->
-                            <label class="pull-right">
-                                <!-- <a href="#">Forgotten Password?</a> -->
-                                @if (Route::has('password.request'))
-                                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                                    {{ __('Forgot your password?') }}
-                                </a>
-                                @endif
-                            </label>
-
-                        </div>
-
-                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
-
-                        <div class="register-link m-t-15 text-center">
-                            <p>Don't have account ? <a href="{{ route('register') }}"> Sign Up Here</a></p>
-                        </div>
+                    <label class="pull-right">
+                        @if (Route::has('password.request'))
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                            {{ __('Lupa Password?') }}
+                        </a>
+                        @endif
+                    </label>
 
                 </div>
-                </form>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Login</button>
+                </div>
+                <p>Tidak Punya Akun? <a href="{{ route('register') }}"> Daftar Disini</a></p>
+
+
+
             </div>
-        </div>
-    </div>
-    </div>
-    @include('sufee.script')
+        </form>
 
-</body>
+    </div>
 
-</html>
+
+
+    <div class="col-lg-6 d-flex">
+        <div id="map" class="bg-light"></div>
+    </div>
+</div>
+
+@endsection

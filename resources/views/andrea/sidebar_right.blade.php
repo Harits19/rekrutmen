@@ -3,11 +3,11 @@
         <form action="#" class="search-form">
             <div class="form-group">
                 <span class="icon icon-search"></span>
-                <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                <input type="text" class="form-control" placeholder="Cari Informasi">
             </div>
         </form>
     </div>
-    <div class="sidebar-box ftco-animate">
+    <!-- <div class="sidebar-box ftco-animate">
         <h3 class="sidebar-heading">Categories</h3>
         <ul class="categories">
             <li><a href="#">Fashion <span>(6)</span></a></li>
@@ -16,9 +16,9 @@
             <li><a href="#">Food <span>(2)</span></a></li>
             <li><a href="#">Photography <span>(7)</span></a></li>
         </ul>
-    </div>
+    </div> -->
 
-    <div class="sidebar-box ftco-animate">
+    <!-- <div class="sidebar-box ftco-animate">
         <h3 class="sidebar-heading">Popular Articles</h3>
         <div class="block-21 mb-4 d-flex">
             <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
@@ -97,5 +97,5 @@
     <div class="sidebar-box ftco-animate">
         <h3 class="sidebar-heading">Paragraph</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut.</p>
-    </div>
+    </div> -->
 </div><!-- END COL -->
