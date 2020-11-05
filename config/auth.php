@@ -14,8 +14,9 @@ return [
     */
 
     'defaults' => [
+        // 'guard' => 'web',
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'organisasi',
     ],
 
     /*
@@ -38,12 +39,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'organisasi',
         ],
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'organisasi',
             'hash' => false,
         ],
     ],
@@ -66,9 +67,9 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'organisasi' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Organisasi::class,
         ],
 
         // 'users' => [
@@ -93,8 +94,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'organisasi' => [
+            'provider' => 'organisasi',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
