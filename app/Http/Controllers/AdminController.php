@@ -24,21 +24,30 @@ class AdminController extends Controller
         return view('admin.dashboard', ['pendaftar' => $pendaftar], ['form' => $form]);
     }
 
-    public function rekrutmen()
+    // public function rekrutmen()
+    // {
+    //     // $pendaftar = Pendaftar::All();
+    //     // $form = Form::find(20);
+    //     // $form->data = json_decode($form->data);
+    //     return view('admin.rekrutmen');
+    // }
+
+    // public function tambah()
+    // {
+    //     // $pendaftar = Pendaftar::All();
+    //     // $form = Form::find(20);
+    //     // $form->data = json_decode($form->data);
+    //     return view('admin.buat-rekrutmen');
+    // }
+
+    public function dynamic()
     {
         // $pendaftar = Pendaftar::All();
         // $form = Form::find(20);
         // $form->data = json_decode($form->data);
-        return view('admin.rekrutmen');
+        return view('admin.create-form');
     }
 
-    public function tambah()
-    {
-        // $pendaftar = Pendaftar::All();
-        // $form = Form::find(20);
-        // $form->data = json_decode($form->data);
-        return view('admin.tambah-rekrutmen');
-    }
 
     public function pendaftar()
     {

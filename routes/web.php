@@ -7,7 +7,9 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\RekrutmenController;
 use App\Http\Controllers\TestController;
+use App\Models\Rekrutmen;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,14 +39,23 @@ Route::get('/detail/{id}', [BerandaController::class, 'detail']);
 Route::get('/form/{id}', [BerandaController::class, 'form']);
 
 
+// Route::resource('rekrutmen', RekrutmenController::class);
+
+
 
 
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/admin/dashboard', [AdminController::class, 'dashboard']);
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('dashboard', [AdminController::class, 'dashboard']);
-    Route::get('rekrutmen', [AdminController::class, 'rekrutmen']);
-    Route::get('rekrutmen/tambah', [AdminController::class, 'tambah']);
+    Route::resource('rekrutmen', RekrutmenController::class);
+    // Route::get('rekrutmen/edit/{id}', [RekrutmenController::class, 'edit']);
+
+    // Route::get('rekrutmen/hapus/{id}', [RekrutmenController::class, 'destroy']);
+
+    // Route::get('dynamic', [AdminController::class, 'dynamic']);
+
+
     Route::get('pendaftar', [AdminController::class, 'pendaftar']);
     Route::get('pendaftar/list/{id}', [AdminController::class, 'list']);
     Route::get('pendaftar/list/{id}/pemberitahuan', [AdminController::class, 'pemberitahuan']);

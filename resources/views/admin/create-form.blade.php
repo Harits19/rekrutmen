@@ -117,7 +117,7 @@
             $('#add_name').on('submit', function(event) {
                 event.preventDefault();
                 $.ajax({
-                    url: '{{ route("store-dynamic") }}',
+                    // url: '{{ ("store-dynamic") }}',
                     method: 'post',
                     data: $(this).serialize(),
                     // dataType:'json',

@@ -33,13 +33,13 @@
                 </div>
 
                 <div class="h4 mb-0">
-                    <span class="count">87500</span>
+                    <span class="count">2</span>
                 </div>
 
-                <small class="text-muted text-uppercase font-weight-bold">Visitors</small>
+                <small class="text-muted text-uppercase font-weight-bold">Rekrutmen</small>
                 <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;"></div>
             </div>
-            <a href="/admin/pendaftar" type="button" class="btn btn-primary">Kelola</a>
+            <a href="/admin/rekrutmen" type="button" class="btn btn-primary">Kelola</a>
 
         </div>
 
@@ -66,10 +66,10 @@
                 </div>
 
                 <div class="h4 mb-0">
-                    <span class="count">87500</span>
+                    <span class="count">129</span>
                 </div>
 
-                <small class="text-muted text-uppercase font-weight-bold">Visitors</small>
+                <small class="text-muted text-uppercase font-weight-bold">Pendaftar</small>
                 <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;"></div>
             </div>
             <a href="/admin/pendaftar" type="button" class="btn btn-primary">Kelola</a>
