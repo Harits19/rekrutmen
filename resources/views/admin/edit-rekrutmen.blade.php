@@ -46,13 +46,20 @@
                 <input hidden id="organisasi_id" name="organisasi_id" value="{{ Auth::user()->id }}">
                 <div class="form-group"><label for="nama" class=" form-control-label">Nama Rekrutmen</label><input value="{{$rekrutmen->nama}}" type="text" name="nama" id="nama" placeholder="Open Recruitmen Staf/Kepanitiaan/Volunteer ..." class="form-control" required></div>
                 <div class="form-group"><label for="deskripsi" class=" form-control-label">Deskripsi</label><textarea value="" style="height: auto;" rows="15" name="deskripsi" id="deskripsi" placeholder="Timeline, Persyaratan, Alur, dll ..." class="form-control" required>{{$rekrutmen->deskripsi}}</textarea></div>
+                <div class="form-group">
+                    <label for="Poster Lama" class=" form-control-label">Poster Lama</label>
+                    <img class="form-control" style="height: 25%; width: 25%;" width="21" height="29.7" src="{{ url('poster/'.$rekrutmen->poster) }}">
+                </div>
 
-                <div class="form-group"><label for="poster" class=" form-control-label">Poster</label>
+                <div class="form-group"><label for="poster" class=" form-control-label">Perbaharui Poster</label>
                     <input type="file" id="poster" name="poster" class="form-control-file" required>
+                    <small><i>(Upload poster dengan type file jpg atau png maksimal berukuran 2MB)</i></small>
 
                 </div>
                 <div class="form-group">
                     <label for="status" class=" form-control-label">Status</label>
+                    <small><i>(Pilih "Tersedia" jika ingin ditampilkan di beranda atau sebaliknya)</i></small>
+
 
                     <select name="status" id="status" value="" class="form-control col col-md-3" required>
                         <option value="">Pilih Status</option>

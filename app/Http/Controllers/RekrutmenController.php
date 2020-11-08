@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Rekrutmen;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
+
+
 
 class RekrutmenController extends Controller
 {
@@ -21,8 +25,6 @@ class RekrutmenController extends Controller
     {
 
         $id = Auth::user()->id;
-
-
         $rekrutmen = Rekrutmen::where('organisasi_id', $id)->orderBy('created_at', 'DESC')->get();
         return view('admin.rekrutmen', ['rekrutmen' => $rekrutmen]);
     }
@@ -52,7 +54,7 @@ class RekrutmenController extends Controller
             'organisasi_id' => 'required',
             'nama' => 'required',
             'deskripsi' => 'required',
-            'poster' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'poster' => 'required',
             'status' => 'required',
 
 
@@ -68,9 +70,15 @@ class RekrutmenController extends Controller
 
         // print_r($string_poster);
 
+        // filter jika terdapat data
+        if ($request->data_formulir != '') {
+            $data_formulir = array_filter($request->data_formulir, 'strlen');
+            $data_formulir = json_encode($data_formulir);
+        }else{
+            $data_formulir = $request->data_formulir;
+            $data_formulir = json_encode($data_formulir);
+        }
 
-        $data_formulir = $request->data_formulir;
-        $data_formulir = json_encode($data_formulir);
 
         Rekrutmen::create([
             'organisasi_id' => $request->organisasi_id,
@@ -140,7 +148,8 @@ class RekrutmenController extends Controller
         } else {
 
             //hapus old image
-            Storage::disk('local')->delete('public/poster/' . $rekrutmen->poster);
+            File::delete(public_path('poster/' . $rekrutmen->poster));
+
 
             //upload new image
             $string_poster = $rekrutmen->id . '.' . $request->poster->getClientOriginalExtension();
@@ -172,9 +181,22 @@ class RekrutmenController extends Controller
      */
     public function destroy($id)
     {
-        //
-        // print_r($id);
+        $rekrutmen = Rekrutmen::find($id);
+
+        File::delete(public_path('poster/' . $rekrutmen->poster));
         Rekrutmen::destroy($id);
         return redirect('admin/rekrutmen')->with('message', 'Berhasil Dihapus');
+    }
+    public function test()
+    {
+
+
+        if (File::exists(public_path('poster/67.jpg'))) {
+
+            File::delete(public_path('poster/67.jpg'));
+        } else {
+
+            dd('File does not exists.');
+        }
     }
 }

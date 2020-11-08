@@ -16,4 +16,9 @@ class Rekrutmen extends Model
     {
     	return $this->belongsTo('App\Models\Organisasi');
     }
+    
+    public function pendaftar()
+    {
+        return $this->belongsToMany('App\Models\Pendaftar');
+    }
 }

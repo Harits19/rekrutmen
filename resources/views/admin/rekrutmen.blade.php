@@ -49,9 +49,10 @@
                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Nama Organisasi</th>
+                                    <th>Nama Rekrutmen</th>
                                     <th>Deskripsi</th>
-                                    <th>Poster</th>
+                                    <!-- <th>Poster</th> -->
+                                    <th>Status</th>
                                     <th>Ubah</th>
                                     <th>Hapus</th>
                                 </tr>
@@ -76,9 +77,10 @@
                                     $string = '<td>'.$string.'...</td>';
                                     echo $string;
                                     @endphp
-                                    <td>
+                                    <!-- <td>
                                     <img width="210" height="297" src="{{ url('poster/'.$data->poster) }}">
-                                    </td>
+                                    </td> -->
+                                    <td>{{$data->status}}</td>
                                     <td> <a href="/admin/rekrutmen/{{$data->id}}/edit" type="button" class="btn btn-primary">Ubah</a>
                                     </td>
                                     <!-- <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#scrollmodal">Ubah</button></td> -->
@@ -89,7 +91,7 @@
                                         <form action="{{ route('rekrutmen.destroy' , $data->id)}}" method="POST">
                                             <input name="_method" type="hidden" value="DELETE">
 
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin?')">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

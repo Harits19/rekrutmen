@@ -6,7 +6,7 @@
     <div class="col-sm-4">
         <div class="page-header float-left">
             <div class="page-title">
-                <h1>Tambah Rekrutmen</h1>
+                <h1>Buat Informasi Rekrutmen</h1>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
             </div>
             @endif
 
-            
+
             <!-- <h1>{{ Auth::user()->id }}</h1> -->
             <form method="post" action="/admin/rekrutmen" enctype="multipart/form-data" id="myForm">
                 @csrf
@@ -62,8 +62,11 @@
                 </div>
                 <div class="form-group">
                     <label for="status" class=" form-control-label">Status</label>
+                    <small><i>(Pilih "Tersedia" jika ingin ditampilkan di beranda atau sebaliknya)</i></small>
 
-                    <select name="status" id="status" class="form-control col col-md-3" required>
+                    <select name="status" id="status" value="" class="form-control col col-md-3" required>
+
+                        <option value="">Pilih Status</option>
                         <option value="tersedia">Tersedia</option>
                         <option value="tutup">Tutup</option>
                     </select>
@@ -72,7 +75,7 @@
                 <br><br>
                 <!-- <button type="button" id="buat_formulir" class="btn btn-primary btn-sm">Buat Formulir</button> -->
                 <button type="button" id="tombol_show" class="btn btn-primary btn-sm">Buat Formulir</button>
-                <button type="button" id="tombol_hide" class="btn btn-primary btn-sm">Batal Buat</button>
+                <button type="button" id="tombol_hide" class="btn btn-danger btn-sm">Batal Buat</button>
                 <!-- <a id="buat_formulir">Show</a> -->
                 <br><br>
                 <div class="form-group" id="div_formulir" hide>
@@ -87,12 +90,15 @@
                             <input name="custom_label" id="custom_label" class="form-control">
                         </div>
                     </div> -->
+                    <table class="table table-bordered" id="bootstrap-data-table">
+                        <tbody id="dynamic_field">
 
-                    <div id="dynamic_field">
-                    </div>
+                        </tbody>
+                    </table>
+
                     <div class="form-group">
                         <div class="input-group">
-                            <input name="custom_label" id="custom_label" class="form-control">
+                            <input name="custom_label" id="custom_label" class="form-control" placeholder="Isi dengan data yang diinginkan">
                         </div>
                     </div>
                 </div>
@@ -193,12 +199,15 @@
 
 <script>
     $(document).ready(function() {
+
+
         var i = 1;
+        var count_row = 1;
         $("#div_formulir").hide();
         $("#tombol_hide").hide();
         $("#tombol_show").click(function() {
             $("#tombol_show").hide();
-            $("#tombol_hide").show();
+            // $("#tombol_hide").show();
             $("#div_formulir").show();
         })
         $("#tombol_hide").click(function() {
@@ -209,12 +218,22 @@
 
         $('#custom_label').change(function() {
             i++;
-            var model = $('#custom_label').val();
+            count_row++;
 
-            $('#dynamic_field').append('<div class="form-group"><label class=" form-control-label">' + model + '</label><div class="input-group"><input value="' + model + '" name="data_formulir[]" class="form-control"></div></div>');
+            // var model = $('#custom_label').val();
+            // $('#dynamic_field').append('<div class="form-group"><label class=" form-control-label">' + model + '</label><div class="input-group"><input value="' + model + '" name="data_formulir[]" class="form-control"></div></div>');
 
+            if ($('#custom_label').val().trim() != '') {
+                var model = $('#custom_label').val();
+                document.getElementById("custom_label").value = "";
+                $('#dynamic_field').append('<tr id="row' + i + '"><td><div class="form-group"><label class=" form-control-label">' + model + '</label><div class="input-group"><input value="' + model + '" name="data_formulir[]" class="form-control"><button  type="button" name="remove" id="' + i + '" class="btn btn-danger btn-sm btn_remove">X</button></div></div></td></tr>');
+            }
         });
-
+        $(document).on('click', '.btn_remove', function() {
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+            count_row--;
+        });
 
     });
 </script>

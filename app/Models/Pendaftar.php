@@ -9,6 +9,11 @@ class Pendaftar extends Model
 {
     use HasFactory;
     protected $table = 'pendaftar';
-    protected $fillable = ['data'];
+    protected $fillable = ['data_formulir', 'nama', 'email', 'no_hp', 'rekrutmen_id'];
+
+    public function rekrutmen()
+    {
+        return $this->belongsToMany('App\Models\Rekrutmen');
+    }
 
 }

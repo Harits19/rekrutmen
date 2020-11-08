@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 use App\Models\Form;
 use App\Models\Pendaftar;
+use App\Models\Rekrutmen;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
+
 
 
 
@@ -18,10 +21,22 @@ class AdminController extends Controller
     //
     public function dashboard()
     {
-        $pendaftar = Pendaftar::All();
-        $form = Form::find(20);
-        // $form->data = json_decode($form->data);
-        return view('admin.dashboard', ['pendaftar' => $pendaftar], ['form' => $form]);
+        // $organisasi_id =Auth::user()->id;
+        // $rekrutmen = Rekrutmen::where('organisasi_id', $organisasi_id)->count();
+
+        
+
+
+        // // print_r($rekrutmen);
+        // // $form = Form::find(20);
+        // return view('admin.dashboard', ['rekrutmen' => $rekrutmen]);
+
+        $organisasi = Auth::user();
+        $rekrutmen = Rekrutmen::where('organisasi_id', $organisasi->id);
+
+        foreach($rekrutmen->pendaftar as $data){
+            print_r($data);
+        }
     }
 
     // public function rekrutmen()

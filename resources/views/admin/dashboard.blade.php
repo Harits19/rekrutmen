@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="h4 mb-0">
-                    <span class="count">2</span>
+                    <span class="count">{{ $rekrutmen }}</span>
                 </div>
 
                 <small class="text-muted text-uppercase font-weight-bold">Rekrutmen</small>

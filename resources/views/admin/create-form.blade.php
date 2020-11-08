@@ -39,9 +39,15 @@
                         <form id="laravel_json" method="post" action="/admin/form/store">
                             {{ csrf_field() }}
 
-                            <div id="dynamic_field">
-                                <!-- <td><button type="button" name="add" id="add" class="btn btn-success">Add More</button></td> -->
-                            </div>
+                            
+
+                            <table class="table table-striped table-bordered" id="bootstrap-data-table">
+                                <tbody id="dynamic_field">
+                                   
+                                </tbody>
+                            </table>
+
+
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success">Submit</button>
                             </div>
@@ -80,10 +86,10 @@
                 i++;
                 var model = $('#custom_label').val();
                 // $('#dynamic_field').append('<tr id="row'+i+'"><td><label>'model'</label></td></tr>');
-                // $('#dynamic_field').append('<tr id="row' + i + '"><td><label>' + model + '</label><input type="text" name="' + model + '"  class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+                $('#dynamic_field').append('<tr id="row' + i + '"><td><label>' + model + '</label><input type="text" name="' + model + '"  class="form-control" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
                 // $('#dynamic_field').append('<div class="form-group"><label class=" form-control-label">' + model + '</label><div class="input-group"><div class="input-group-addon"> <input name="' + model + '" id="custom_label" class="form-control"></div></div><small class="form-text text-muted">ex. 99/99/9999</small></div>');
 
-                $('#dynamic_field').append('<div class="form-group"><label class=" form-control-label">' + model + '</label><div class="input-group"><input value="' + model + '" name="data[]" class="form-control"></div><small class="form-text text-muted">ex. 99/99/9999</small></div>');
+                // $('#dynamic_field').append('<div class="form-group"><label class=" form-control-label">' + model + '</label><div class="input-group"><input value="' + model + '" name="data[]" class="form-control"></div><small class="form-text text-muted">ex. 99/99/9999</small></div>');
                 // alert(model);
 
             });

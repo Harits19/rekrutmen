@@ -37,6 +37,7 @@ use App\Models\Rekrutmen;
 Route::get('/', [BerandaController::class, 'index']);
 Route::get('/detail/{id}', [BerandaController::class, 'detail']);
 Route::get('/form/{id}', [BerandaController::class, 'form']);
+Route::post('/store', [BerandaController::class, 'store']);
 
 
 // Route::resource('rekrutmen', RekrutmenController::class);
@@ -49,11 +50,14 @@ Route::get('/form/{id}', [BerandaController::class, 'form']);
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('dashboard', [AdminController::class, 'dashboard']);
     Route::resource('rekrutmen', RekrutmenController::class);
+
+    Route::get('test', [RekrutmenController::class, 'test']);
+
     // Route::get('rekrutmen/edit/{id}', [RekrutmenController::class, 'edit']);
 
     // Route::get('rekrutmen/hapus/{id}', [RekrutmenController::class, 'destroy']);
 
-    // Route::get('dynamic', [AdminController::class, 'dynamic']);
+    Route::get('dynamic', [AdminController::class, 'dynamic']);
 
 
     Route::get('pendaftar', [AdminController::class, 'pendaftar']);
