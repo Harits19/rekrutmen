@@ -73,7 +73,7 @@ class RekrutmenController extends Controller
         // filter jika terdapat data
         if ($request->data_formulir != '') {
             $data_formulir = array_filter($request->data_formulir, 'strlen');
-            $data_formulir = json_encode($data_formulir);
+            $data_formulir = json_encode(array_values($data_formulir));
         }else{
             $data_formulir = $request->data_formulir;
             $data_formulir = json_encode($data_formulir);

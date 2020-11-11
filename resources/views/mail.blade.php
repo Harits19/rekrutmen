@@ -1,4 +1,4 @@
-Hello <strong>{{ $name }}</strong>,
+Hello <strong>{{ $pendaftar->nama }}</strong>,
 <p>
 
-    {{$body}}</p>
+    {{$pesan}}</p>

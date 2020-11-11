@@ -226,7 +226,7 @@
             if ($('#custom_label').val().trim() != '') {
                 var model = $('#custom_label').val();
                 document.getElementById("custom_label").value = "";
-                $('#dynamic_field').append('<tr id="row' + i + '"><td><div class="form-group"><label class=" form-control-label">' + model + '</label><div class="input-group"><input value="' + model + '" name="data_formulir[]" class="form-control"><button  type="button" name="remove" id="' + i + '" class="btn btn-danger btn-sm btn_remove">X</button></div></div></td></tr>');
+                $('#dynamic_field').append('<tr id="row' + i + '"><td><div class="form-group"><label class=" form-control-label">' + model + '</label><div class="input-group"><input readonly value="' + model + '" name="data_formulir[]" class="form-control"><button  type="button" name="remove" id="' + i + '" class="btn btn-danger btn-sm btn_remove">X</button></div></div></td></tr>');
             }
         });
         $(document).on('click', '.btn_remove', function() {

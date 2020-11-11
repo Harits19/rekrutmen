@@ -32,11 +32,26 @@ class AdminController extends Controller
         // return view('admin.dashboard', ['rekrutmen' => $rekrutmen]);
 
         $organisasi = Auth::user();
-        $rekrutmen = Rekrutmen::where('organisasi_id', $organisasi->id);
+        $rekrutmen = Rekrutmen::where('organisasi_id', $organisasi->id)->orderBy('created_at', 'DESC')->withCount('pendaftar')->get();
 
-        foreach($rekrutmen->pendaftar as $data){
-            print_r($data);
+        //menghitung total pendaftar
+        $total = 0;
+        foreach ($rekrutmen as $data) {
+            $total += $data->pendaftar_count;
         }
+
+        $rekrutmen->total_rekrutmen = $rekrutmen->count();
+        $rekrutmen->total_pendaftar = $total;
+
+        // print_r("total rekrutmen = ".$rekrutmen->total_rekrutmen);
+        // print_r("total pendaftar = ".$rekrutmen->total_pendaftar);
+
+        
+
+    
+        return view('admin.dashboard', ['rekrutmen' => $rekrutmen]);
+
+    
     }
 
     // public function rekrutmen()

@@ -33,78 +33,77 @@
             <strong class="card-title">Pendaftar</strong>
           </div>
           <div class="card-body">
-            <table id="bootstrap-data-table" class="table table-striped table-bordered">
-              <!-- membuat ukuran table auto -->
-              <!-- <table id="bootstrap-data-table" style="table-layout: auto; width: 180px;  " class="table table-striped table-bordered"> -->
-              <thead>
-                <tr>
-                  <th><input type="checkbox" id="checkbox1" name="checkbox1" value="option1"></th>
-                  <th>Nama Pendaftar</th>
-                  <th>Email</th>
-                  <th>No. Hp</th>
-                  <th>Status</th>
-                  <th>Ubah</th>
-                  <th>Hapus</th>
-                </tr>
-              </thead>
-              <tbody>
+            @if(session()->has('message'))
+            <div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
+              {{ session()->get('message') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            @endif
 
-                <tr>
-                  <td> <input type="checkbox" id="checkbox1" name="checkbox1" value="option1">
-                  </td>
-                  @php
-                  $string = "Abdullah Harits";
-                  $string = strip_tags($string);
-                  $string = substr($string, 0, 20);
-                  $string = '<td>'.$string.'...</td>';
-                  echo $string;
-                  @endphp
-                  <td>huha@gmail.com</td>
-                  <td>083840493135</td>
-                  <td>Hadir</td>
-                  <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ubahmodal">Ubah</button></td>
-                  <td><button type="button" class="btn btn-danger btn-sm">Hapus</button></td>
+            @if (count($errors) > 0)
+            <div class="alert alert-danger" role="alert">
+              @foreach ($errors->all() as $error)
 
-                </tr>
+              {{ $error }} <br>
 
-                <tr>
-                  <td> <input type="checkbox" id="checkbox1" name="checkbox1" value="option1">
+              @endforeach
+            </div>
+            @endif
+            <form action="/admin/pendaftar/list/{{ Request::segment(4) }}/pemberitahuan " method="POST" enctype="multipart/form-data">
+
+              <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                <!-- membuat ukuran table auto -->
+                <!-- <table id="bootstrap-data-table" style="table-layout: auto; width: 180px;  " class="table table-striped table-bordered"> -->
+                <thead>
+                  <tr>
+                    <th><input type="checkbox" id="checkbox1" name="checkbox1" value="option1"></th>
+                    <th>Nama Pendaftar</th>
+                    <th>Email</th>
+                    <th>No. Hp</th>
+                    <th>Status</th>
+                    <th>Ubah</th>
+                    <th>Hapus</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+
+                  @foreach($pendaftar as $data)
+                  <tr>
+                    <td> <input type="checkbox" id="checkbox{{$data->id}}" name="checkbox[]" value="{{$data}}">
+                    </td>
                     @php
-                    $string = "Abdullah Harits";
+                    $string = $data->nama;
                     $string = strip_tags($string);
                     $string = substr($string, 0, 20);
-                    $string = '
-                  <td>'.$string.'...</td>';
-                  echo $string;
-                  @endphp
-                  <td>huha@gmail.com</td>
-                  <td>083840493135</td>
-                  <td>Hadir</td>
-                  <td><button type="button" class="btn btn-primary btn-sm">Ubah</button></td>
-                  <td><button type="button" class="btn btn-danger btn-sm">Hapus</button></td>
+                    $string = '<td>'.$string.'...</td>';
+                    echo $string;
+                    @endphp
+                    <td>{{$data->email}}</td>
+                    <td>{{$data->no_hp}}</td>
+                    <td>hadir</td>
+                    <td> <a href="/admin/pendaftar/{{$data->id}}/edit" type="button" class="btn btn-primary">Ubah</a>
+                      <!-- <td><button href="/admin/pendaftar/{{$data->id}}/edit" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ubahmodal">Ubah</button></td> -->
+                      <!-- <td>
+                    <form action="" method="POST">
+                      <input name="_method" type="hidden" value="DELETE">
+                      <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin?')">Delete</button>
+                    </form>
+                  </td> -->
 
-                </tr>
+                    <td> <a href="/admin/pendaftar/{{$data->id}}/destroy" type="button" class="btn btn-danger" onclick="return confirm('Apakah anda yakin?')">Hapus</a>
 
-                <tr>
-                  <td> <input type="checkbox" id="checkbox1" name="checkbox1" value="option1">
-                    @php
-                    $string = "Abdullah Harits";
-                    $string = strip_tags($string);
-                    $string = substr($string, 0, 20);
-                    $string = '
-                  <td>'.$string.'...</td>';
-                  echo $string;
-                  @endphp
-                  <td>huha@gmail.com</td>
-                  <td>083840493135</td>
-                  <td>Hadir</td>
-                  <td><button type="button" class="btn btn-primary btn-sm">Ubah</button></td>
-                  <td><button type="button" class="btn btn-danger btn-sm">Hapus</button></td>
 
-                </tr>
-              </tbody>
-            </table>
-            <button type="button" class="btn btn-primary">Unduh Data</button>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+              <button type="button" class="btn btn-primary">Unduh Data</button>
+              <button href="" type="submit" class="btn btn-primary">Kirim Pemberitahuan</button>
+            </form>
+
 
           </div>
         </div>
@@ -151,7 +150,7 @@
 
               </tbody>
             </table>
-            <a href="/admin/pendaftar/list/1/pemberitahuan" type="button" class="btn btn-primary">Kirim Pemberitahuan</a>
+            <a href="/admin/pendaftar/list/{{ Request::segment(4) }}/pemberitahuan" type="button" class="btn btn-primary">Kirim Pemberitahuan</a>
           </div>
         </div>
       </div>

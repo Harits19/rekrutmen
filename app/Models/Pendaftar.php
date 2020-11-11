@@ -13,7 +13,7 @@ class Pendaftar extends Model
 
     public function rekrutmen()
     {
-        return $this->belongsToMany('App\Models\Rekrutmen');
+        return $this->belongsTo('App\Models\Rekrutmen');
     }
 
 }

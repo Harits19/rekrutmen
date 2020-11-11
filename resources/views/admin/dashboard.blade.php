@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="h4 mb-0">
-                    <span class="count">{{ $rekrutmen }}</span>
+                    <span class="count">{{ $rekrutmen->total_rekrutmen }}</span>
                 </div>
 
                 <small class="text-muted text-uppercase font-weight-bold">Rekrutmen</small>
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="h4 mb-0">
-                    <span class="count">129</span>
+                    <span class="count">{{$rekrutmen->total_pendaftar}}</span>
                 </div>
 
                 <small class="text-muted text-uppercase font-weight-bold">Pendaftar</small>

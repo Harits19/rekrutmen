@@ -7,6 +7,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\PendaftarController;
 use App\Http\Controllers\RekrutmenController;
 use App\Http\Controllers\TestController;
 use App\Models\Rekrutmen;
@@ -49,9 +50,18 @@ Route::post('/store', [BerandaController::class, 'store']);
 // Route::middleware(['auth:sanctum', 'verified'])->get('/admin/dashboard', [AdminController::class, 'dashboard']);
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('dashboard', [AdminController::class, 'dashboard']);
+    
     Route::resource('rekrutmen', RekrutmenController::class);
-
-    Route::get('test', [RekrutmenController::class, 'test']);
+    
+    Route::resource('pendaftar', PendaftarController::class)->except([
+        'destroy'
+    ]);
+    Route::get('pendaftar/{id}/destroy', [PendaftarController::class, 'destroy']);
+    Route::get('pendaftar/list/{id}', [PendaftarController::class, 'list']);
+    Route::post('pendaftar/list/{id}/pemberitahuan', [PendaftarController::class, 'pemberitahuan']);
+    Route::post('pendaftar/list/{id}/pemberitahuan/kirim', [PendaftarController::class, 'kirim']);
+    // Route::post('kirim', [PendaftarController::class, 'kirim']);
+    
 
     // Route::get('rekrutmen/edit/{id}', [RekrutmenController::class, 'edit']);
 
@@ -60,9 +70,9 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->group(function
     Route::get('dynamic', [AdminController::class, 'dynamic']);
 
 
-    Route::get('pendaftar', [AdminController::class, 'pendaftar']);
-    Route::get('pendaftar/list/{id}', [AdminController::class, 'list']);
-    Route::get('pendaftar/list/{id}/pemberitahuan', [AdminController::class, 'pemberitahuan']);
+    // Route::get('pendaftar', [AdminController::class, 'pendaftar']);
+    // Route::get('pendaftar/list/{id}', [AdminController::class, 'list']);
+    // Route::get('pendaftar/list/{id}/pemberitahuan', [AdminController::class, 'pemberitahuan']);
 });
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

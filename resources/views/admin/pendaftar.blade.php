@@ -43,18 +43,21 @@
               </thead>
               <tbody>
 
+                @foreach ($rekrutmen as $data)
                 <tr>
                   @php
-                  $string = "Open Recruitmen Staf Muda RKIM 2020";
+                  $string = $data->nama;
                   $string = strip_tags($string);
                   $string = substr($string, 0, 20);
                   $string = '<td>'.$string.'...</td>';
                   echo $string;
                   @endphp
-                  <td>120</td>
-                  <td><a type="button" href="/admin/pendaftar/list/1" class="btn btn-primary btn-sm">List Pendaftar</a></td>
-                  
+                  <td>{{$data->pendaftar_count}}</td>
+                  <td><a type="button" href="/admin/pendaftar/list/{{$data->id}}" class="btn btn-primary btn-sm">List Pendaftar</a></td>
+
                 </tr>
+
+                @endforeach
 
 
               </tbody>
