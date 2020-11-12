@@ -6,6 +6,14 @@
     <div class="row pt-md-4">
 
         <div class="col-md-12">
+            @if(session()->has('message'))
+            <div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
+                {{ session()->get('message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
             @foreach($rekrutmen as $data)
             <div class="blog-entry ftco-animate d-md-flex">
                 <img class="img img-2" style="height: 25%; width: 25%;" width="21" height="29.7" src="{{ url('poster/'.$data->poster) }}"></img>
@@ -24,7 +32,7 @@
                         <p class="meta">
                             <!-- <span><a href="#"><i class="icon-folder-o mr-2"></i>RKIM UB</a></span> -->
 
-                            
+
                             @php
                             // untuk mengakses has many value di blade
                             $string = $data->organisasi->name;
@@ -40,9 +48,9 @@
                     $string = strip_tags($string);
                     $string = substr($string, 0, 250);
                     $string = '<p class="mb-4" style="text-align: justify;text-justify: inter-word;">'.$string;
-                    echo $string;
-                    @endphp
-                    <a href="/detail/{{$data->id}}"> ...Read More</a></p>
+                        echo $string;
+                        @endphp
+                        <a href="/detail/{{$data->id}}"> ...Read More</a></p>
                     <!-- <p class="mb-4">sadasdads</p> -->
                     <!-- <p><a href="/detail/" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p> -->
                 </div>

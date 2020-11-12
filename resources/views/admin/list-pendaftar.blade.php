@@ -58,7 +58,7 @@
                 <!-- <table id="bootstrap-data-table" style="table-layout: auto; width: 180px;  " class="table table-striped table-bordered"> -->
                 <thead>
                   <tr>
-                    <th><input type="checkbox" id="checkbox1" name="checkbox1" value="option1"></th>
+                    <th><input type="checkbox" id="check-all" name="check-all" value="option1"></th>
                     <th>Nama Pendaftar</th>
                     <th>Email</th>
                     <th>No. Hp</th>
@@ -225,5 +225,21 @@
       </div>
     </div>
   </div>
+  <script>
+    $(document).ready(function() {
+      $('#check-all').click(function(event) {
+        if (this.checked) {
+          // Iterate each checkbox
+          $(':checkbox').each(function() {
+            this.checked = true;
+          });
+        } else {
+          $(':checkbox').each(function() {
+            this.checked = false;
+          });
+        }
+      });
+    });
+  </script>
 </div>
 @endsection

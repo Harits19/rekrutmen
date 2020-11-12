@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Mail\Pemberitahuan;
+use App\Models\Konfirmasi;
 use App\Models\Pendaftar;
 use App\Models\Rekrutmen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+
+
 
 
 class PendaftarController extends Controller
@@ -36,12 +39,8 @@ class PendaftarController extends Controller
 
     public function pemberitahuan(Request $request, $id)
     {
-        // print_r($id);
 
-        // foreach ($request->checkbox as $data) {
-        //     $data = json_decode($data);
-        //     print_r($data->nama);
-        // }
+
 
         $request->validate([
             'checkbox' => 'required',
@@ -49,6 +48,10 @@ class PendaftarController extends Controller
 
         $pendaftar = $request->checkbox;
         return view('admin.kirim-pemberitahuan-pendaftar', ['pendaftar' => $pendaftar]);
+
+        // $random_hash = bin2hex(random_bytes(32));
+        // print_r($random_hash);
+
     }
 
     public function kirim(Request $request, $id)
@@ -72,21 +75,51 @@ class PendaftarController extends Controller
         }
 
 
-        foreach ($request->layanan as $layanan) {
-            if ($layanan == 'whatsapp') {
-                // print_r("whatsapp");
-            }
-            if ($layanan == 'email') {
-                // print_r("email");
-                foreach ($request->pendaftar as $pendaftar) {
-                    $pendaftar = json_decode($pendaftar);
-                    Mail::to($pendaftar->email)->queue(new Pemberitahuan($pendaftar, $request->pesan));
+        if ($request->konfirmasi_kehadiran == "true") {
+            foreach ($request->layanan as $layanan) {
+
+                if ($layanan == 'whatsapp') {
+                }
+                if ($layanan == 'email') {
+                    foreach ($request->pendaftar as $pendaftar) {
+
+                        $random_hash = bin2hex(random_bytes(32));
+                        $pesan = $request->pesan . " Silahkan klik link berikut ini untuk melakukan konfirmasi kehadiran <a href='http://rekrutmen.fia/konfirmasi/" . $random_hash . "'>http://rekrutmen.fia/konfirmasi/" . $random_hash . "</a>";
+                        $pendaftar = json_decode($pendaftar);
+                        Mail::to($pendaftar->email)->queue(new Pemberitahuan($pendaftar, $pesan));
+
+                        //masukkan kode ke database
+                        Konfirmasi::create([
+                            'pendaftar_id' => $pendaftar->id,
+                            'kode' => $random_hash,
+                        ]);
+
+                        //update status pendaftar menjadi proses konfirmasi
+                        $pendaftar = Pendaftar::findOrFail($pendaftar->id);
+                        $pendaftar->update([
+                            'status' => 'proses konfirmasi',
+                        ]);
+                    }
+                }
+                if ($layanan == 'sms') {
                 }
             }
-            if ($layanan == 'sms') {
-                // print_r("sms");
+        } else {
+            foreach ($request->layanan as $layanan) {
+                if ($layanan == 'whatsapp') {
+                }
+                if ($layanan == 'email') {
+                    foreach ($request->pendaftar as $pendaftar) {
+                        $pendaftar = json_decode($pendaftar);
+                        Mail::to($pendaftar->email)->queue(new Pemberitahuan($pendaftar, $request->pesan));
+                    }
+                }
+                if ($layanan == 'sms') {
+                }
             }
         }
+
+
 
         return redirect('/admin/pendaftar/list/' . $id)->with('message', 'Berhasil Mengirim');
     }

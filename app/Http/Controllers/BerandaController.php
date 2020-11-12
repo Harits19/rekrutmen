@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Konfirmasi;
 use App\Models\Organisasi;
 use App\Models\Pendaftar;
 use App\Models\Rekrutmen;
@@ -15,17 +16,40 @@ use Illuminate\Support\Facades\Auth;
 class BerandaController extends Controller
 {
     //
+
+    public function konfirmasi($kode)
+    {
+
+        // print_r($code);
+        // $konfirmasi = Konfirmasi::where('kode', $kode)->get();
+        $konfirmasi = Konfirmasi::where('kode', $kode);
+
+
+        if ($konfirmasi->exists()) {
+            $konfirmasi = $konfirmasi->get();
+            // print($konfirmasi[0]->pendaftar->nama);
+
+            $pendaftar = Pendaftar::findOrFail($konfirmasi[0]->pendaftar->id);
+            $pendaftar->update([
+                'status' => 'hadir',
+            ]);
+            return redirect('/')->with('message', 'Berhasil Mengkonfirmasi');
+        } else {
+            return redirect('/')->with('message', 'Gagal Mengkonfirmasi');
+        }
+    }
+
     public function index()
     {
 
         $rekrutmen = Rekrutmen::all();
 
-        
+
 
 
 
         return view('beranda.beranda', ['rekrutmen' => $rekrutmen]);
-        
+
         // $organisasi = Organisasi::find(24);
         // foreach($organisasi->rekrutmen as $data){
         //     echo $data->poster;
@@ -59,7 +83,7 @@ class BerandaController extends Controller
             'nama' => 'required',
             'no_hp' => 'required',
             'email' => 'required',
-            'rekrutmen_id'=> 'required',
+            'rekrutmen_id' => 'required',
 
 
         ]);
@@ -73,11 +97,11 @@ class BerandaController extends Controller
             'no_hp' => $request->no_hp,
             'email' => $request->email,
             'data_formulir' => $data_formulir,
+            'status' => '-',
 
         ]);
 
 
         return redirect('/');
-
     }
 }

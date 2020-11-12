@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePendaftarTable extends Migration
+class CreatePendaftar3Table extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,14 @@ class CreatePendaftarTable extends Migration
     public function up()
     {
         Schema::create('pendaftar', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('rekrutmen_id');
-            $table->string('nama');
-            $table->string('no_hp');
-            $table->string('email');
-            $table->json('data_formulir');
-            $table->enum('status', ['-','proses konfirmasi', 'hadir']);
-            $table->timestamps();
+                $table->id();
+                $table->foreignId('rekrutmen_id');
+                $table->string('nama');
+                $table->string('no_hp');
+                $table->string('email');
+                $table->json('data_formulir');
+                $table->enum('status', ['-','proses konfirmasi', 'hadir']);
+                $table->timestamps();
         });
     }
 

@@ -56,12 +56,13 @@
                 @endforeach
                 <div class="form-check-inline form-check">
                     <label for="deskripsi" class="form-check-label">Isi Pesan &nbsp&nbsp</label>
-                    <!-- <label for="inline-checkbox1" class="form-check-label ">
-                        <input type="checkbox" id="inline-checkbox1" name="inline-checkbox1" value="option1" class="form-check-input">Tambah Konfirmasi Kehadiran &nbsp&nbsp
-                    </label> -->
+                    <label for="konfirmasi_kehadiran" class="form-check-label ">
+                        <input type="checkbox" id="konfirmasi_kehadiran" name="konfirmasi_kehadiran" value="true" class="form-check-input">Tambah Konfirmasi Kehadiran &nbsp&nbsp
+                    </label>
                     <br><br>
                 </div>
                 <textarea required row="7" id="pesan" name="pesan" class="form-control"></textarea>
+                <p id="example-link" value=""></p>
                 <br>
 
 
@@ -94,6 +95,17 @@
                 }
 
             });
+        });
+
+        $('#konfirmasi_kehadiran').click(function(event) {
+            if (this.checked) {
+                // Iterate each checkbox
+                $("#example-link").text("(cth : Silahkan klik link berikut ini untuk melakukan konfirmasi kehadiran http://rekrutmen.fia/konfirmasi/5a9645c3050e36e2a200f8185c08f73ba814a2ef8cf6331c1xxxxxxxxx )");
+                
+            } else {
+                $("#example-link").text("");
+
+            }
         });
     </script>
 </div>
