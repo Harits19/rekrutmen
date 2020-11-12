@@ -53,7 +53,7 @@
                     <h5>Data <strong>Formulir</strong></h5>
                 </div>
 
-                @foreach (array_combine($pendaftar->data_formulir, $pendaftar->rekrutmen->data_formulir) as $data_p => $data_r)
+                @foreach (array_combine($pendaftar->rekrutmen->data_formulir, $pendaftar->data_formulir) as $data_r => $data_p)
                 <div class="form-group"><label class=" form-control-label">{{$data_r}}</label><input value="{{$data_p}}" type="text" name="data_formulir[]" id="data_formulir" placeholder="{{$data_r}} ..." class="form-control" required></div>
 
                 @endforeach

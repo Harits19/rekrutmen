@@ -187,6 +187,7 @@ class RekrutmenController extends Controller
         Rekrutmen::destroy($id);
         return redirect('admin/rekrutmen')->with('message', 'Berhasil Dihapus');
     }
+    
     public function test()
     {
 

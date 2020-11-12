@@ -9,6 +9,7 @@ use App\Models\Rekrutmen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -21,6 +22,68 @@ class PendaftarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function unduh($id)
+    {
+        $pendaftar = Pendaftar::where('rekrutmen_id', $id)->get();
+        File::makeDirectory(storage_path('biodata/temp/'));
+
+
+        foreach ($pendaftar as $data) {
+            $values = [];
+
+            $data->rekrutmen->data_formulir = json_decode($data->rekrutmen->data_formulir);
+            $data->data_formulir = json_decode($data->data_formulir);
+
+            foreach (array_combine($data->rekrutmen->data_formulir, $data->data_formulir) as $data_r => $data_p) {
+                array_push($values,['key' => $data_r, 'value' => $data_p]);
+            }
+
+            $nama_rekrutmen = $data->rekrutmen->nama;
+            $nama = $data->nama;
+            $email = $data->email;
+            $no_hp = $data->no_hp;
+
+            $template = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('biodata_pendaftar.docx'));
+            $template->setValue('nama_rekrutmen', $nama_rekrutmen);
+            $template->setValue('nama', $nama);
+            $template->setValue('email', $email);
+            $template->setValue('no_hp', $no_hp);
+            $template->setImageValue('foto', array('path' => public_path('poster/81.jpg'), 'width' => 120, 'height' => 150, 'ratio' => false));
+
+            $template->cloneRowAndSetValues('key', $values);
+            $filename = $data->id . ". " . $nama . ".docx";
+            header('Content-Type: application/octet-stream');
+            header("Content-Disposition: attachment; filename=$filename");
+            // $template->saveAs(storage_path('biodata/test.docx', true)); //untuk download langsung 
+            $template->saveAs(storage_path('biodata/temp/' . $filename));
+            // break;
+        }
+
+
+        // //membuat zip file
+        $zip_file = $pendaftar[0]->rekrutmen->nama.'.zip';
+        $zip = new \ZipArchive();
+        $zip->open($zip_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
+
+        $path = storage_path('biodata/temp');
+        $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path));
+        foreach ($files as $name => $file) {
+            // We're skipping all subfolders
+            if (!$file->isDir()) {
+                $filePath     = $file->getRealPath();
+
+                // extracting filename with substr/strlen
+                $relativePath = 'biodata/temp/' . substr($filePath, strlen($path) + 1);
+
+                $zip->addFile($filePath, $relativePath);
+            }
+        }
+        $zip->close();
+        File::deleteDirectory(storage_path('biodata/temp'));
+        return response()->download($zip_file);
+    }
+
     public function index()
     {
         $organisasi = Auth::user();

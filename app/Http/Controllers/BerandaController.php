@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+namespace App\Http\Controllers;
+
+use Exception;
+
 use App\Models\Konfirmasi;
 use App\Models\Organisasi;
 use App\Models\Pendaftar;
 use App\Models\Rekrutmen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+
+
 
 
 
@@ -43,11 +50,6 @@ class BerandaController extends Controller
     {
 
         $rekrutmen = Rekrutmen::all();
-
-
-
-
-
         return view('beranda.beranda', ['rekrutmen' => $rekrutmen]);
 
         // $organisasi = Organisasi::find(24);
@@ -103,5 +105,10 @@ class BerandaController extends Controller
 
 
         return redirect('/');
+    }
+
+    public function word()
+    {
+        
     }
 }

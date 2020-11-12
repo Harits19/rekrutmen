@@ -40,6 +40,7 @@ Route::get('/detail/{id}', [BerandaController::class, 'detail']);
 Route::get('/form/{id}', [BerandaController::class, 'form']);
 Route::post('/store', [BerandaController::class, 'store']);
 Route::get('/konfirmasi/{kode}', [BerandaController::class, 'konfirmasi']);
+Route::get('/word', [BerandaController::class, 'word']);
 
 
 // Route::resource('rekrutmen', RekrutmenController::class);
@@ -61,6 +62,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->group(function
     Route::get('pendaftar/list/{id}', [PendaftarController::class, 'list']);
     Route::post('pendaftar/list/{id}/pemberitahuan', [PendaftarController::class, 'pemberitahuan']);
     Route::post('pendaftar/list/{id}/pemberitahuan/kirim', [PendaftarController::class, 'kirim']);
+    Route::get('pendaftar/list/{id}/unduh', [PendaftarController::class, 'unduh']);
     // Route::post('kirim', [PendaftarController::class, 'kirim']);
     
 

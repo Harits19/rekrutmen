@@ -100,7 +100,7 @@
                   @endforeach
                 </tbody>
               </table>
-              <button type="button" class="btn btn-primary">Unduh Data</button>
+              <a href="/admin/pendaftar/list/{{ Request::segment(4) }}/unduh" type="button" class="btn btn-primary">Unduh Data</a>
               <button href="" type="submit" class="btn btn-primary">Kirim Pemberitahuan</button>
             </form>
 
