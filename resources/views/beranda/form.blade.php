@@ -17,7 +17,7 @@
     <div class="row pt-md-4">
 
 
-        <form method="post" action="/store">
+        <form method="post" action="/store" enctype="multipart/form-data">
 
             <div class="card-body card-block">
                 <div>
@@ -48,6 +48,15 @@
                         <div class="input-group-addon"></div>
                         <input type="email" id="email" name="email" class="form-control" required>
                     </div>
+                </div>
+                <div class="form-group"><label for="foto" class=" form-control-label">Foto Pas</label>
+                    <input type="file" id="foto" name="foto" class="form-control-file" required>
+                    <small><i>(Upload foto dengan type file jpg atau png maksimal berukuran 2MB)</i></small>
+
+                    <!-- <div class="card">
+                        <img width="210" height="290" class="img img-2" src="{{ url('andrea/images/image_1.jpg') }}"></img>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm">Upload Poster</button> -->
 
                 </div>
                 @if($rekrutmen->data_formulir)
@@ -72,12 +81,6 @@
             </div>
         </form>
 
-    </div>
-
-
-
-    <div class="col-lg-6 d-flex">
-        <div id="map" class="bg-light"></div>
     </div>
 </div>
 

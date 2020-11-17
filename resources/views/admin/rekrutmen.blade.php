@@ -53,6 +53,7 @@
                                     <th>Deskripsi</th>
                                     <!-- <th>Poster</th> -->
                                     <th>Status</th>
+                                    <th>Poster</th>
                                     <th>Ubah</th>
                                     <th>Hapus</th>
                                 </tr>
@@ -81,6 +82,9 @@
                                     <img width="210" height="297" src="{{ url('poster/'.$data->poster) }}">
                                     </td> -->
                                     <td>{{$data->status}}</td>
+                                    <td style="height: 10%; width: 10%;" width="3" height="4">
+                                        <img src="{{ url('poster/'.$data->poster) }}">
+                                    </td>
                                     <td> <a href="/admin/rekrutmen/{{$data->id}}/edit" type="button" class="btn btn-primary">Ubah</a>
                                     </td>
                                     <!-- <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#scrollmodal">Ubah</button></td> -->

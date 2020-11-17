@@ -63,6 +63,7 @@
                     <th>Email</th>
                     <th>No. Hp</th>
                     <th>Status</th>
+                    <th>Foto</th>
                     <th>Ubah</th>
                     <th>Hapus</th>
                   </tr>
@@ -84,6 +85,9 @@
                     <td>{{$data->email}}</td>
                     <td>{{$data->no_hp}}</td>
                     <td>hadir</td>
+                    <td style="height: 10%; width: 10%;" width="3" height="4">
+                      <img src="{{ asset('storage/foto/'.$data->foto) }}">
+                    </td>
                     <td> <a href="/admin/pendaftar/{{$data->id}}/edit" type="button" class="btn btn-primary">Ubah</a>
                       <!-- <td><button href="/admin/pendaftar/{{$data->id}}/edit" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ubahmodal">Ubah</button></td> -->
                       <!-- <td>

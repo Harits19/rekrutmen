@@ -9,7 +9,7 @@ class Pendaftar extends Model
 {
     use HasFactory;
     protected $table = 'pendaftar';
-    protected $fillable = ['data_formulir', 'nama', 'email', 'no_hp', 'rekrutmen_id', 'status'];
+    protected $fillable = ['data_formulir', 'nama', 'email', 'no_hp', 'rekrutmen_id', 'status', 'foto'];
 
     public function rekrutmen()
     {

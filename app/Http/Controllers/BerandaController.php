@@ -12,7 +12,11 @@ use App\Models\Pendaftar;
 use App\Models\Rekrutmen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Contracts\Cache\Store;
+use Illuminate\Support\Facades\Storage;
+
 
 
 
@@ -86,12 +90,23 @@ class BerandaController extends Controller
             'no_hp' => 'required',
             'email' => 'required',
             'rekrutmen_id' => 'required',
+            'foto' => 'required',
 
 
         ]);
 
         // merubah jenis data dari array ke json
         $data_formulir = json_encode($request->data_formulir);
+
+        
+        //get next id
+        $next_id = DB::select("SHOW TABLE STATUS LIKE 'pendaftar'");
+        $next_id = $next_id[0]->Auto_increment;
+
+        //upload file
+        $foto = $next_id . '.' . $request->foto->getClientOriginalExtension();
+        $request->foto->move(storage_path('app/public/foto'), $foto);
+
 
         Pendaftar::create([
             'nama' => $request->nama,
@@ -100,11 +115,13 @@ class BerandaController extends Controller
             'email' => $request->email,
             'data_formulir' => $data_formulir,
             'status' => '-',
+            'foto' => $foto,
 
         ]);
 
 
-        return redirect('/');
+
+        return redirect('/')->with('message', 'Data Berhasil Dikirim');
     }
 
     public function word()
