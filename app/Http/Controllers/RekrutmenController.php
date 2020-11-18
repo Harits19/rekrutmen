@@ -25,7 +25,7 @@ class RekrutmenController extends Controller
     {
 
         $id = Auth::user()->id;
-        $rekrutmen = Rekrutmen::where('organisasi_id', $id)->orderBy('created_at', 'DESC')->get();
+        $rekrutmen = Rekrutmen::where('organisasi_id', $id)->orderBy('created_at', 'DESC')->paginate(5);
         return view('admin.rekrutmen', ['rekrutmen' => $rekrutmen]);
     }
 

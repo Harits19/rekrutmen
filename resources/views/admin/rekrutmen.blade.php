@@ -103,6 +103,7 @@
 
                             </tbody>
                         </table>
+                        {{ $rekrutmen->links() }}
                     </div>
                 </div>
             </div>
