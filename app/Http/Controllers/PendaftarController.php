@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\Pemberitahuan;
+use App\Mail\Pemberitahuan as MailPemberitahuan;
+use App\Models\Pemberitahuan as ModelPemberitahuan;
 use App\Models\Konfirmasi;
 use App\Models\Pendaftar;
 use App\Models\Rekrutmen;
@@ -36,7 +37,7 @@ class PendaftarController extends Controller
             $data->data_formulir = json_decode($data->data_formulir);
 
             foreach (array_combine($data->rekrutmen->data_formulir, $data->data_formulir) as $data_r => $data_p) {
-                array_push($values,['key' => $data_r, 'value' => $data_p]);
+                array_push($values, ['key' => $data_r, 'value' => $data_p]);
             }
 
             $nama_rekrutmen = $data->rekrutmen->nama;
@@ -62,7 +63,7 @@ class PendaftarController extends Controller
 
 
         // //membuat zip file
-        $zip_file = $pendaftar[0]->rekrutmen->nama.'.zip';
+        $zip_file = $pendaftar[0]->rekrutmen->nama . '.zip';
         $zip = new \ZipArchive();
         $zip->open($zip_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
@@ -96,35 +97,23 @@ class PendaftarController extends Controller
     public function list($id)
     {
         $pendaftar = Pendaftar::where('rekrutmen_id', $id)->get();
-        return view('admin.list-pendaftar', ['pendaftar' => $pendaftar]);
+        $pemberitahuan = ModelPemberitahuan::where('rekrutmen_id', $id)->get();
+        return view('admin.list-pendaftar', ['pendaftar' => $pendaftar, 'pemberitahuan' => $pemberitahuan]);
         //
     }
 
     public function pemberitahuan(Request $request, $id)
     {
-
-
-
         $request->validate([
             'checkbox' => 'required',
         ]);
 
         $pendaftar = $request->checkbox;
         return view('admin.kirim-pemberitahuan-pendaftar', ['pendaftar' => $pendaftar]);
-
-        // $random_hash = bin2hex(random_bytes(32));
-        // print_r($random_hash);
-
     }
 
     public function kirim(Request $request, $id)
     {
-        // $request->validate([
-        //     'pendaftar' => 'required',
-        //     'layanan' => 'required',
-        //     'pesan' => 'required',
-        // ]);
-
         $validator = Validator::make($request->all(), [
             'pendaftar' => 'required',
             'layanan' => 'required',
@@ -147,9 +136,9 @@ class PendaftarController extends Controller
                     foreach ($request->pendaftar as $pendaftar) {
 
                         $random_hash = bin2hex(random_bytes(32));
-                        $pesan = $request->pesan . " Silahkan klik link berikut ini untuk melakukan konfirmasi kehadiran <a href='http://rekrutmen.fia/konfirmasi/" . $random_hash . "'>http://rekrutmen.fia/konfirmasi/" . $random_hash . "</a>";
-                        $pendaftar = json_decode($pendaftar);
-                        Mail::to($pendaftar->email)->queue(new Pemberitahuan($pendaftar, $pesan));
+                        $pesan       = $request->pesan . " Silahkan klik link berikut ini untuk melakukan konfirmasi kehadiran <a href='http://rekrutmen.fia/konfirmasi/" . $random_hash . "'>http://rekrutmen.fia/konfirmasi/" . $random_hash . "</a>";
+                        $pendaftar   = json_decode($pendaftar);
+                        Mail::to($pendaftar->email)->queue(new MailPemberitahuan($pendaftar, $pesan));
 
                         //masukkan kode ke database
                         Konfirmasi::create([
@@ -174,7 +163,7 @@ class PendaftarController extends Controller
                 if ($layanan == 'email') {
                     foreach ($request->pendaftar as $pendaftar) {
                         $pendaftar = json_decode($pendaftar);
-                        Mail::to($pendaftar->email)->queue(new Pemberitahuan($pendaftar, $request->pesan));
+                        Mail::to($pendaftar->email)->queue(new MailPemberitahuan($pendaftar, $request->pesan));
                     }
                 }
                 if ($layanan == 'sms') {
@@ -182,6 +171,28 @@ class PendaftarController extends Controller
             }
         }
 
+        // foreach($request->pendaftar as $pendaftar){
+
+        // }
+
+        $penerima = [];
+        $layanan = [];
+        foreach ($request->pendaftar as $pendaftar) {
+            // print_r($pendaftar);
+            $pendaftar = json_decode($pendaftar);
+            // print_r($pendaftar->nama);
+            array_push($penerima, $pendaftar->nama);
+        }
+        $penerima = array_filter($penerima, 'strlen');
+        $penerima = json_encode(array_values($penerima));
+        $layanan = json_encode($request->layanan);
+
+        ModelPemberitahuan::create([
+            'rekrutmen_id' => $id,
+            'penerima' => $penerima,
+            'layanan' => $layanan,
+            'pesan' => $request->pesan,
+        ]);
 
 
         return redirect('/admin/pendaftar/list/' . $id)->with('message', 'Berhasil Mengirim');

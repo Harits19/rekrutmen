@@ -130,27 +130,35 @@
                 </tr>
               </thead>
               <tbody>
-
+                @foreach($pemberitahuan as $data)
                 <tr>
                   @php
-                  $string = "Abdullah Harits, Abhista Ahnaf, Pahlevi Wahyu";
+                  $string = json_decode($data->penerima);
+                  $string = implode(" | ",$string);
+                  $penerima = $string;
+                  $string = strip_tags($string);
+                  $string = substr($string, 0, 20);
+                  $string = '<td>'.$string.'...</td>';
+                  echo $string;
+
+                  $string = json_decode($data->layanan);
+                  $string = implode(" | ",$string);
+                  $layanan = $string;
+                  $string = '<td>'.$string.'</td>';
+                  echo $string;
+
+                  $string = $data->pesan;
+                  $pesan = $string;
                   $string = strip_tags($string);
                   $string = substr($string, 0, 20);
                   $string = '<td>'.$string.'...</td>';
                   echo $string;
                   @endphp
-                  <td>Whatsapp, Email, SMS</td>
-                  @php
-                  $string = "Diberitahukan kepada para pendaftar bahwa tempat screening ada di";
-                  $string = strip_tags($string);
-                  $string = substr($string, 0, 20);
-                  $string = '<td>'.$string.'...</td>';
-                  echo $string;
-                  @endphp
-                  <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal">Lihat Detail</button></td>
+                  <!-- <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal">Lihat Detail</button></td> -->
+                  <td><button class="btn btn-primary" id="button_detail_riwayat" data-toggle="modal" href="#myModalDetailRiwayat" data-penerima="<?php echo $penerima ?>" data-layanan="<?php echo $layanan ?>" data-pesan="<?php echo $pesan ?>">Lihat Detail</button></td>
 
                 </tr>
-
+                @endforeach
 
               </tbody>
             </table>
@@ -161,36 +169,8 @@
 
     </div>
   </div><!-- .animated -->
-  <div class="modal fade" id="ubahmodal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="scrollmodalLabel">Ubah Data Pendaftar</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="card">
-            <div class="card-header"><small> Isilah data dibawah ini </small><strong>Dengan Benar!</strong></div>
-            <div class="card-body card-block">
-              <div class="form-group"><label for="nama" class=" form-control-label">Nama</label><input type="text" id="nama" placeholder="" class="form-control"></div>
-              <div class="form-group"><label for="deskripsi" class=" form-control-label">Email</label><input row="7" id="deskripsi" placeholder="" class="form-control"></input></div>
-              <div class="form-group"><label for="deskripsi" class=" form-control-label">No Hp</label><input row="7" id="deskripsi" placeholder="" class="form-control"></input></div>
-              <div class="form-group"><label for="deskripsi" class=" form-control-label">Status</label><input row="7" id="deskripsi" placeholder="" class="form-control"></input></div>
-              <div class="form-group"><label for="deskripsi" class=" form-control-label">Data</label><input row="7" id="deskripsi" placeholder="" class="form-control"></input></div>
-
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary">Confirm</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="detailmodal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel" aria-hidden="true">
+  
+  <div class="modal fade" id="myModalDetailRiwayat" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -204,9 +184,9 @@
             <div>
               <div class="card">
                 <div class="card-body card-block">
-                  <div class="form-group"><label for="nama" class=" form-control-label">Penerima</label><input type="text" id="nama" placeholder="" class="form-control"></div>
-                  <div class="form-group"><label for="nama" class=" form-control-label">Layanan yang Digunakan</label><input type="text" id="nama" placeholder="" class="form-control"></div>
-                  <div class="form-group"><label for="nama" class=" form-control-label">Isi Pesan</label><input type="text" id="nama" placeholder="" class="form-control"></div>
+                  <div class="form-group"><label for="nama" class=" form-control-label">Penerima</label><textarea style="height: auto;" rows="15" type="text" id="penerima" name="penerima" placeholder="" class="form-control"></textarea></div>
+                  <div class="form-group"><label for="nama" class=" form-control-label">Layanan yang Digunakan</label><input type="text" id="layanan" name="layanan" placeholder="" class="form-control"></div>
+                  <div class="form-group"><label for="nama" class=" form-control-label">Isi Pesan</label><textarea style="height: auto;" rows="15" type="text" id="pesan" name="pesan" placeholder="" class="form-control"></textarea></div>
 
                   <!-- <div class="form-group"><label for="deskripsi" class=" form-control-label">Deskripsi</label><textarea row="7" id="deskripsi" placeholder="" class="form-control"></textarea></div> -->
 
@@ -224,7 +204,6 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary">Confirm</button>
         </div>
       </div>
     </div>
@@ -243,6 +222,16 @@
           });
         }
       });
+    });
+
+    var penerima;
+    $(document).on('click', '#button_detail_riwayat', function(e) {
+      penerima = $(this).attr('data-penerima');
+      $(".modal-body #penerima").val(penerima);
+      layanan = $(this).attr('data-layanan');
+      $(".modal-body #layanan").val(layanan);
+      pesan = $(this).attr('data-pesan');
+      $(".modal-body #pesan").val(pesan);
     });
   </script>
 </div>

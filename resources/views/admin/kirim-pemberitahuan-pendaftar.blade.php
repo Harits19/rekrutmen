@@ -100,7 +100,7 @@
         $('#konfirmasi_kehadiran').click(function(event) {
             if (this.checked) {
                 // Iterate each checkbox
-                $("#example-link").text("isi pesan akan ditambahkan link (cth link : http://rekrutmen.fia/konfirmasi/5a9645c3050e36e2a200f8185c08f73ba814a2ef8cf6331c1xxxxxxxxx )");
+                $("#example-link").text("isi pesan akan ditambahkan link konfirmasi kehadiran (cth link : http://rekrutmen.fia/konfirmasi/5a9645c3050e36e2a200f8185c08f73ba814a2ef8cf6331c1xxxxxxxxx )");
                 
             } else {
                 $("#example-link").text("");
