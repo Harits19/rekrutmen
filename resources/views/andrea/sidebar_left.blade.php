@@ -9,17 +9,17 @@
             <ul>
                 <!-- <li class="colorlib-active"><a href="/homepage">Beranda</a></li> -->
                 <li><a href="/">Beranda</a></li>
-                <li><a href="/organisasi">Organisasi</a></li>
+                <!-- <li><a href="/organisasi">Organisasi</a></li> -->
                 <li><a href="/login">Login</a></li>
                 <li><a href="/register">Register</a></li>
                 
             </ul>
         </nav>
         <br>
-            <form action="#" class="search-form">
+            <form action="/search" method="GET" class="search-form">
                 <div class="form-group">
                     <span class="icon icon-search"></span>
-                    <input type="text" class="form-control" placeholder="Cari Informasi">
+                    <input name="key" id="id" type="text" class="form-control" placeholder="Cari Informasi">
                 </div>
             </form>
         <!-- <div class="mb-4">

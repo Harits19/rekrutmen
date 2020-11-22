@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 
 
 
@@ -52,14 +53,28 @@ class BerandaController extends Controller
 
     public function index()
     {
-
-        $rekrutmen = Rekrutmen::all();
+        $rekrutmen = DB::table('rekrutmen')
+            ->join('organisasi', 'rekrutmen.organisasi_id', '=', 'organisasi.id')
+            ->select('rekrutmen.*', 'organisasi.name as organisasi_nama')
+            ->get();
         return view('beranda.beranda', ['rekrutmen' => $rekrutmen]);
+    }
 
-        // $organisasi = Organisasi::find(24);
-        // foreach($organisasi->rekrutmen as $data){
-        //     echo $data->poster;
-        // }
+    public function search(Request $request)
+    {
+        $key = $request->key;
+        $rekrutmen = DB::table('rekrutmen')
+            ->join('organisasi', 'rekrutmen.organisasi_id', '=', 'organisasi.id')
+            ->select('rekrutmen.*', 'organisasi.name as organisasi_nama')
+            ->where('rekrutmen.nama', 'like', "%" . $key . "%")
+            ->orWhere('rekrutmen.deskripsi', 'like', "%" . $key . "%")
+            ->orWhere('organisasi.name', 'like', "%" . $key . "%");
+
+        if (!$rekrutmen->exists()) {
+            // print_r("tidak ada");
+            return view('beranda.beranda', ['rekrutmen' => $rekrutmen->get()])->with('message', 'Data Tidak Ditemukan');;
+        }
+        return view('beranda.beranda', ['rekrutmen' => $rekrutmen->get()]);
     }
 
     public function detail($id)
@@ -98,7 +113,7 @@ class BerandaController extends Controller
         // merubah jenis data dari array ke json
         $data_formulir = json_encode($request->data_formulir);
 
-        
+
         //get next id
         $next_id = DB::select("SHOW TABLE STATUS LIKE 'pendaftar'");
         $next_id = $next_id[0]->Auto_increment;
@@ -126,6 +141,5 @@ class BerandaController extends Controller
 
     public function word()
     {
-        
     }
 }

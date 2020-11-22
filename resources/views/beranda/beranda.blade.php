@@ -5,10 +5,20 @@
 <div class="col-xl-8 py-5 px-md-5">
     <div class="row pt-md-4">
 
+    
         <div class="col-md-12">
             @if(session()->has('message'))
             <div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
                 {{ session()->get('message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+
+            @if(!empty($message))
+            <div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
+                {{$message }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -35,7 +45,7 @@
 
                             @php
                             // untuk mengakses has many value di blade
-                            $string = $data->organisasi->name;
+                            $string = $data->organisasi_nama;
                             $string = strip_tags($string);
                             $string = substr($string, 0, 35);
                             $string = '<span><a href="#"><i class="icon-folder-o mr-2"></i>'.$string.'...</a></span>';

@@ -41,6 +41,7 @@ Route::get('/form/{id}', [BerandaController::class, 'form']);
 Route::post('/store', [BerandaController::class, 'store']);
 Route::get('/konfirmasi/{kode}', [BerandaController::class, 'konfirmasi']);
 Route::get('/word', [BerandaController::class, 'word']);
+Route::get('/search', [BerandaController::class, 'search']);
 
 
 // Route::resource('rekrutmen', RekrutmenController::class);

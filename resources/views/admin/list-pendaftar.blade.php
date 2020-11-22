@@ -27,6 +27,59 @@
   <div class="animated fadeIn">
     <div class="row">
 
+
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <strong class="card-title">Riwayat Pesan</strong>
+          </div>
+          <div class="card-body">
+            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Penerima</th>
+                  <th>Layanan yang Digunakan</th>
+                  <th>Isi Pesan</th>
+                  <th>Lihat Detail</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($pemberitahuan as $data)
+                <tr>
+                  @php
+                  $string = json_decode($data->penerima);
+                  $string = implode(" | ",$string);
+                  $penerima = $string;
+                  $string = strip_tags($string);
+                  $string = substr($string, 0, 20);
+                  $string = '<td>'.$string.'...</td>';
+                  echo $string;
+
+                  $string = json_decode($data->layanan);
+                  $string = implode(" | ",$string);
+                  $layanan = $string;
+                  $string = '<td>'.$string.'</td>';
+                  echo $string;
+
+                  $string = $data->pesan;
+                  $pesan = $string;
+                  $string = strip_tags($string);
+                  $string = substr($string, 0, 20);
+                  $string = '<td>'.$string.'...</td>';
+                  echo $string;
+                  @endphp
+                  <!-- <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal">Lihat Detail</button></td> -->
+                  <td><button class="btn btn-primary" id="button_detail_riwayat" data-toggle="modal" href="#myModalDetailRiwayat" data-penerima="<?php echo $penerima ?>" data-layanan="<?php echo $layanan ?>" data-pesan="<?php echo $pesan ?>">Lihat Detail</button></td>
+
+                </tr>
+                @endforeach
+
+              </tbody>
+            </table>
+            <a href="/admin/pendaftar/list/{{ Request::segment(4) }}/pemberitahuan" type="button" class="btn btn-primary">Kirim Pemberitahuan</a>
+          </div>
+        </div>
+      </div>
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
@@ -114,62 +167,11 @@
       </div>
 
 
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <strong class="card-title">Riwayat Pesan</strong>
-          </div>
-          <div class="card-body">
-            <table id="bootstrap-data-table" class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th>Penerima</th>
-                  <th>Layanan yang Digunakan</th>
-                  <th>Isi Pesan</th>
-                  <th>Lihat Detail</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($pemberitahuan as $data)
-                <tr>
-                  @php
-                  $string = json_decode($data->penerima);
-                  $string = implode(" | ",$string);
-                  $penerima = $string;
-                  $string = strip_tags($string);
-                  $string = substr($string, 0, 20);
-                  $string = '<td>'.$string.'...</td>';
-                  echo $string;
 
-                  $string = json_decode($data->layanan);
-                  $string = implode(" | ",$string);
-                  $layanan = $string;
-                  $string = '<td>'.$string.'</td>';
-                  echo $string;
-
-                  $string = $data->pesan;
-                  $pesan = $string;
-                  $string = strip_tags($string);
-                  $string = substr($string, 0, 20);
-                  $string = '<td>'.$string.'...</td>';
-                  echo $string;
-                  @endphp
-                  <!-- <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailmodal">Lihat Detail</button></td> -->
-                  <td><button class="btn btn-primary" id="button_detail_riwayat" data-toggle="modal" href="#myModalDetailRiwayat" data-penerima="<?php echo $penerima ?>" data-layanan="<?php echo $layanan ?>" data-pesan="<?php echo $pesan ?>">Lihat Detail</button></td>
-
-                </tr>
-                @endforeach
-
-              </tbody>
-            </table>
-            <a href="/admin/pendaftar/list/{{ Request::segment(4) }}/pemberitahuan" type="button" class="btn btn-primary">Kirim Pemberitahuan</a>
-          </div>
-        </div>
-      </div>
 
     </div>
   </div><!-- .animated -->
-  
+
   <div class="modal fade" id="myModalDetailRiwayat" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">

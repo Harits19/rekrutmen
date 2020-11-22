@@ -75,7 +75,7 @@ class PendaftarController extends Controller
                 $filePath     = $file->getRealPath();
 
                 // extracting filename with substr/strlen
-                $relativePath = 'biodata/temp/' . substr($filePath, strlen($path) + 1);
+                $relativePath = 'biodata/' . substr($filePath, strlen($path) + 1);
 
                 $zip->addFile($filePath, $relativePath);
             }
