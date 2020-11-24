@@ -43,6 +43,8 @@ Route::get('/konfirmasi/{kode}', [BerandaController::class, 'konfirmasi']);
 Route::get('/word', [BerandaController::class, 'word']);
 Route::get('/search', [BerandaController::class, 'search']);
 
+Route::get('/test', [PendaftarController::class, 'test']);
+
 
 // Route::resource('rekrutmen', RekrutmenController::class);
 

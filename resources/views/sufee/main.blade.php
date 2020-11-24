@@ -14,8 +14,8 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="">MyBimbel</a>
-                <a class="navbar-brand hidden" href="">M</a>
+                <a class="navbar-brand" href="">Organisasi</a>
+                <a class="navbar-brand hidden" href="">O</a>
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -39,7 +39,7 @@
             <div class="header-menu">
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
-                    <div class="header-left">
+                    <!-- <div class="header-left">
                         <button class="search-trigger"><i class="fa fa-search"></i></button>
                         <div class="form-inline">
                             <form class="search-form">
@@ -64,24 +64,24 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="{{ asset('style/images/admin.jpg') }}">
-                        </a>
-                        <div class="user-menu dropdown-menu">
-                            <button class="btn btn-link btn-sm" href="/"><i class="fa fa-link"></i> Setting</button>
                             <form id="logout_form" method="POST" action="/logout">
                                 @csrf
                                 <button class="btn btn-link btn-sm" type="submit" id="logout"><i class="fa fa-power-off"></i> Logout</button>
                             </form>
+                        </a>
+                        <div class="user-menu dropdown-menu">
+                            <!-- <button class="btn btn-link btn-sm" href="/"><i class="fa fa-link"></i> Setting</button> -->
+
                         </div>
                     </div>
 
-                    <div class="language-select dropdown" id="language-select">
+                    <!-- <div class="language-select dropdown" id="language-select">
                         <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="language" aria-haspopup="true" aria-expanded="true">
                             <i class="flag-icon flag-icon-id"></i>
                         </a>
@@ -99,7 +99,7 @@
                                 <i class="flag-icon flag-icon-jp"></i>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>

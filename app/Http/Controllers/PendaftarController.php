@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
+// use GuzzleHttp\Client;
 
 
 
@@ -44,18 +45,19 @@ class PendaftarController extends Controller
             $nama = $data->nama;
             $email = $data->email;
             $no_hp = $data->no_hp;
+            $foto = $data->foto;
 
             $template = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('biodata_pendaftar.docx'));
             $template->setValue('nama_rekrutmen', $nama_rekrutmen);
             $template->setValue('nama', $nama);
             $template->setValue('email', $email);
             $template->setValue('no_hp', $no_hp);
-            $template->setImageValue('foto', array('path' => public_path('poster/81.jpg'), 'width' => 120, 'height' => 150, 'ratio' => false));
+            $template->setImageValue('foto', array('path' => storage_path('app/public/foto/' . $foto), 'width' => 120, 'height' => 150, 'ratio' => false));
 
             $template->cloneRowAndSetValues('key', $values);
             $filename = $data->id . ". " . $nama . ".docx";
-            header('Content-Type: application/octet-stream');
-            header("Content-Disposition: attachment; filename=$filename");
+            // header('Content-Type: application/octet-stream');
+            // header("Content-Disposition: attachment; filename=$filename");
             // $template->saveAs(storage_path('biodata/test.docx', true)); //untuk download langsung 
             $template->saveAs(storage_path('biodata/temp/' . $filename));
             // break;
@@ -65,10 +67,13 @@ class PendaftarController extends Controller
         // //membuat zip file
         $zip_file = $pendaftar[0]->rekrutmen->nama . '.zip';
         $zip = new \ZipArchive();
-        $zip->open($zip_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
+        $zip->open(public_path('temp/' . $zip_file), \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
         $path = storage_path('biodata/temp');
         $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path));
+
+        $temp = null;
+
         foreach ($files as $name => $file) {
             // We're skipping all subfolders
             if (!$file->isDir()) {
@@ -78,11 +83,15 @@ class PendaftarController extends Controller
                 $relativePath = 'biodata/' . substr($filePath, strlen($path) + 1);
 
                 $zip->addFile($filePath, $relativePath);
+                // $temp = $relativePath;
             }
         }
         $zip->close();
         File::deleteDirectory(storage_path('biodata/temp'));
-        return response()->download($zip_file);
+
+        // print_r($temp);
+        // die;
+        return response()->download(public_path('temp/' . $zip_file));
     }
 
     public function index()
@@ -91,6 +100,33 @@ class PendaftarController extends Controller
         $rekrutmen = Rekrutmen::where('organisasi_id', $organisasi->id)->orderBy('created_at', 'DESC')->withCount('pendaftar')->get();
 
         return view('admin.pendaftar', ['rekrutmen' => $rekrutmen]);
+    }
+
+    public function test()
+    {
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api.rajaongkir.com/starter/cost');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "origin=501&destination=114&weight=1700&courier=jne");
+        
+        $headers = array();
+        $headers[] = 'Content-Type: application/x-www-form-urlencoded';
+        $headers[] = 'Key: 9895c3c42e251192efde4e57807807fc';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+
+        echo $result;
+        // curl_close($ch);
+
+        // https://incarnate.github.io/curl-to-php/ <- ubah command curl ke pdf
+
+        
     }
 
 
@@ -199,6 +235,7 @@ class PendaftarController extends Controller
     }
 
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -291,6 +328,7 @@ class PendaftarController extends Controller
             'nama' => $request->nama,
             'no_hp' => $request->no_hp,
             'email' => $request->email,
+            'seleksi' => $request->seleksi,
             'data_formulir' => $data_formulir,
 
         ]);

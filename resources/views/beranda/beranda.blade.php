@@ -5,7 +5,7 @@
 <div class="col-xl-8 py-5 px-md-5">
     <div class="row pt-md-4">
 
-    
+
         <div class="col-md-12">
             @if(session()->has('message'))
             <div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
@@ -25,9 +25,12 @@
             </div>
             @endif
             @foreach($rekrutmen as $data)
+            @if($data->status == "tersedia")
             <div class="blog-entry ftco-animate d-md-flex">
                 <img class="img img-2" style="height: 25%; width: 25%;" width="21" height="29.7" src="{{ url('poster/'.$data->poster) }}"></img>
                 <div class="text text-2 pl-md-4">
+
+
 
                     @php
                     $string = $data->nama;
@@ -65,6 +68,7 @@
                     <!-- <p><a href="/detail/" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p> -->
                 </div>
             </div>
+            @endif
             @endforeach
         </div>
 

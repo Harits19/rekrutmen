@@ -52,21 +52,18 @@
                 </div>
 
                 <div class="form-group"><label for="poster" class=" form-control-label">Perbaharui Poster</label>
-                    <input type="file" id="poster" name="poster" class="form-control-file" required>
+                    <input type="file" id="poster" name="poster" class="form-control-file">
                     <small><i>(Upload poster dengan type file jpg atau png maksimal berukuran 2MB)</i></small>
 
                 </div>
                 <div class="form-group">
                     <label for="status" class=" form-control-label">Status</label>
                     <small><i>(Pilih "Tersedia" jika ingin ditampilkan di beranda atau sebaliknya)</i></small>
-
-
                     <select name="status" id="status" value="" class="form-control col col-md-3" required>
                         <option value="">Pilih Status</option>
                         <option value="tersedia">Tersedia</option>
                         <option value="tutup">Tutup</option>
                     </select>
-
                 </div>
                 <br><br>
 

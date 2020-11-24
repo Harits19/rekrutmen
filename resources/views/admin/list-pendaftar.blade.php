@@ -116,6 +116,7 @@
                     <th>Email</th>
                     <th>No. Hp</th>
                     <th>Status</th>
+                    <th>Seleksi</th>
                     <th>Foto</th>
                     <th>Ubah</th>
                     <th>Hapus</th>
@@ -137,7 +138,8 @@
                     @endphp
                     <td>{{$data->email}}</td>
                     <td>{{$data->no_hp}}</td>
-                    <td>hadir</td>
+                    <td>{{$data->status}}</td>
+                    <td>{{$data->seleksi}}</td>
                     <td style="height: 10%; width: 10%;" width="3" height="4">
                       <img src="{{ asset('storage/foto/'.$data->foto) }}">
                     </td>

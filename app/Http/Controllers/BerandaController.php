@@ -130,6 +130,7 @@ class BerandaController extends Controller
             'email' => $request->email,
             'data_formulir' => $data_formulir,
             'status' => '-',
+            'seleksi' => '-',
             'foto' => $foto,
 
         ]);

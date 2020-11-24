@@ -47,6 +47,16 @@
                 <div class="form-group"><label for="nama" class=" form-control-label">Nama Pendaftar</label><input value="{{$pendaftar->nama}}" type="text" name="nama" id="nama" placeholder="Nama Pendaftar ..." class="form-control" required></div>
                 <div class="form-group"><label for="nama" class=" form-control-label">No Hp</label><input value="{{$pendaftar->no_hp}}" type="nummber" name="no_hp" id="no_hp" placeholder="No Hp ..." class="form-control" required></div>
                 <div class="form-group"><label for="nama" class=" form-control-label">Email</label><input value="{{$pendaftar->email}}" type="email" name="email" id="email" placeholder="Email ..." class="form-control" required></div>
+                <div class="form-group">
+                    <label for="seleksi" class=" form-control-label">Seleksi</label>
+                    <small><i>(Hasil Seleksi dari Proses Rekrutmen yang Dilakukan)</i></small>
+                    <select name="seleksi" id="seleksi" value="" class="form-control col col-md-3" required>
+                        <option value="">Pilih Hasil Seleksi</option>
+                        <option value="-">-</option>
+                        <option value="Diterima">Diterima</option>
+                        <option value="Tidak Diterima">Tidak Diterima</option>
+                    </select>
+                </div>
 
                 <br><br>
                 <div class="form-group">
