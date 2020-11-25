@@ -7,6 +7,7 @@ use App\Models\Pemberitahuan as ModelPemberitahuan;
 use App\Models\Konfirmasi;
 use App\Models\Pendaftar;
 use App\Models\Rekrutmen;
+use App\Models\Smsd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -110,12 +111,12 @@ class PendaftarController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, "origin=501&destination=114&weight=1700&courier=jne");
-        
+
         $headers = array();
         $headers[] = 'Content-Type: application/x-www-form-urlencoded';
         $headers[] = 'Key: 9895c3c42e251192efde4e57807807fc';
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        
+
         $result = curl_exec($ch);
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
@@ -126,7 +127,7 @@ class PendaftarController extends Controller
 
         // https://incarnate.github.io/curl-to-php/ <- ubah command curl ke pdf
 
-        
+
     }
 
 
@@ -165,52 +166,61 @@ class PendaftarController extends Controller
 
         if ($request->konfirmasi_kehadiran == "true") {
             foreach ($request->layanan as $layanan) {
+                foreach ($request->pendaftar as $pendaftar) {
+                    $random_hash = bin2hex(random_bytes(32));
+                    $pendaftar   = json_decode($pendaftar);
 
-                if ($layanan == 'whatsapp') {
-                }
-                if ($layanan == 'email') {
-                    foreach ($request->pendaftar as $pendaftar) {
+                    if ($layanan == 'whatsapp') {
+                    }
 
-                        $random_hash = bin2hex(random_bytes(32));
-                        $pesan       = $request->pesan . " Silahkan klik link berikut ini untuk melakukan konfirmasi kehadiran <a href='http://rekrutmen.fia/konfirmasi/" . $random_hash . "'>http://rekrutmen.fia/konfirmasi/" . $random_hash . "</a>";
-                        $pendaftar   = json_decode($pendaftar);
+                    if ($layanan == 'email') {
+                        $pesan = $request->pesan . " <a href='http://rekrutmen.fia/konfirmasi/" . $random_hash . "'>http://rekrutmen.fia/konfirmasi/" . $random_hash . "</a>";
                         Mail::to($pendaftar->email)->queue(new MailPemberitahuan($pendaftar, $pesan));
+                    }
 
-                        //masukkan kode ke database
-                        Konfirmasi::create([
-                            'pendaftar_id' => $pendaftar->id,
-                            'kode' => $random_hash,
-                        ]);
-
-                        //update status pendaftar menjadi proses konfirmasi
-                        $pendaftar = Pendaftar::findOrFail($pendaftar->id);
-                        $pendaftar->update([
-                            'status' => 'proses konfirmasi',
+                    if ($layanan == 'sms') {
+                        $pesan = $request->pesan . " http://rekrutmen.fia/konfirmasi/" . $random_hash;
+                        Smsd::create([
+                            'DestinationNumber' => $pendaftar->no_hp,
+                            'TextDecoded' => $pesan,
+                            'CreatorID' => $id,
                         ]);
                     }
-                }
-                if ($layanan == 'sms') {
+
+                    //masukkan kode ke database
+                    Konfirmasi::create([
+                        'pendaftar_id' => $pendaftar->id,
+                        'kode' => $random_hash,
+                    ]);
+
+                    //update status pendaftar menjadi proses konfirmasi
+                    $pendaftar = Pendaftar::findOrFail($pendaftar->id);
+                    $pendaftar->update([
+                        'status' => 'proses konfirmasi',
+                    ]);
                 }
             }
         } else {
             foreach ($request->layanan as $layanan) {
-                if ($layanan == 'whatsapp') {
-                }
-                if ($layanan == 'email') {
-                    foreach ($request->pendaftar as $pendaftar) {
-                        $pendaftar = json_decode($pendaftar);
+                foreach ($request->pendaftar as $pendaftar) {
+                    $pendaftar = json_decode($pendaftar);
+
+                    if ($layanan == 'whatsapp') {
+                    }
+                    if ($layanan == 'email') {
                         Mail::to($pendaftar->email)->queue(new MailPemberitahuan($pendaftar, $request->pesan));
                     }
-                }
-                if ($layanan == 'sms') {
+                    if ($layanan == 'sms') {
+                        Smsd::create([
+                            'DestinationNumber' => $pendaftar->no_hp,
+                            'TextDecoded' => $request->pesan,
+                            'CreatorID' => $id,
+                        ]);
+                    }
                 }
             }
         }
-
-        // foreach($request->pendaftar as $pendaftar){
-
-        // }
-
+        // menyimpan data ke  tabel pemberitahuan
         $penerima = [];
         $layanan = [];
         foreach ($request->pendaftar as $pendaftar) {

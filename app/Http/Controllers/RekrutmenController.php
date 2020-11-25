@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pendaftar;
 use App\Models\Rekrutmen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -74,7 +75,7 @@ class RekrutmenController extends Controller
         if ($request->data_formulir != '') {
             $data_formulir = array_filter($request->data_formulir, 'strlen');
             $data_formulir = json_encode(array_values($data_formulir));
-        }else{
+        } else {
             $data_formulir = $request->data_formulir;
             $data_formulir = json_encode($data_formulir);
         }
@@ -181,13 +182,20 @@ class RekrutmenController extends Controller
      */
     public function destroy($id)
     {
-        $rekrutmen = Rekrutmen::find($id);
+        // menghapus data pendaftar yang where rekrutmen_id = id
+        $pendaftar = Pendaftar::where('rekrutmen_id', $id)->get();
+        foreach ($pendaftar as $pendaftar) {
+            File::delete(storage_path('app/public/foto/' . $pendaftar->foto));
+            Pendaftar::destroy($pendaftar->id);
+        }
 
+        $rekrutmen = Rekrutmen::find($id);
         File::delete(public_path('poster/' . $rekrutmen->poster));
         Rekrutmen::destroy($id);
+        
         return redirect('admin/rekrutmen')->with('message', 'Berhasil Dihapus');
     }
-    
+
     public function test()
     {
 

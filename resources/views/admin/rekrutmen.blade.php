@@ -95,7 +95,7 @@
                                         <form action="{{ route('rekrutmen.destroy' , $data->id)}}" method="POST">
                                             <input name="_method" type="hidden" value="DELETE">
 
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin?')">Delete</button>
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Peringatan! Menghapus informasi rekrutmen juga akan menghapus data pendaftar terkait, Apakah anda yakin? ')">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
