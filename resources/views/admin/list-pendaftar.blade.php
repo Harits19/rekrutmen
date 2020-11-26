@@ -76,6 +76,7 @@
 
               </tbody>
             </table>
+            {{ $pemberitahuan->links() }}
             <a href="/admin/pendaftar/list/{{ Request::segment(4) }}/pemberitahuan" type="button" class="btn btn-primary">Kirim Pemberitahuan</a>
           </div>
         </div>
@@ -191,16 +192,6 @@
                   <div class="form-group"><label for="nama" class=" form-control-label">Penerima</label><textarea style="height: auto;" rows="15" type="text" id="penerima" name="penerima" placeholder="" class="form-control"></textarea></div>
                   <div class="form-group"><label for="nama" class=" form-control-label">Layanan yang Digunakan</label><input type="text" id="layanan" name="layanan" placeholder="" class="form-control"></div>
                   <div class="form-group"><label for="nama" class=" form-control-label">Isi Pesan</label><textarea style="height: auto;" rows="15" type="text" id="pesan" name="pesan" placeholder="" class="form-control"></textarea></div>
-
-                  <!-- <div class="form-group"><label for="deskripsi" class=" form-control-label">Deskripsi</label><textarea row="7" id="deskripsi" placeholder="" class="form-control"></textarea></div> -->
-
-                  <!-- <div class="form-group"><label for="poster" class=" form-control-label">Poster</label>
-                    <div class="card">
-                      <img width="210" height="290" class="img img-2" src="{{ url('andrea/images/image_1.jpg') }}"></img>
-
-                    </div>
-                    <button type="button" class="btn btn-primary btn-sm">Upload Poster</button>
-                  </div> -->
                 </div>
               </div>
             </div>

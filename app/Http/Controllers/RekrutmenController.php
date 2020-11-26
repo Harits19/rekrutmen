@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pemberitahuan;
 use App\Models\Pendaftar;
 use App\Models\Rekrutmen;
 use Illuminate\Http\Request;
@@ -188,6 +189,8 @@ class RekrutmenController extends Controller
             File::delete(storage_path('app/public/foto/' . $pendaftar->foto));
             Pendaftar::destroy($pendaftar->id);
         }
+
+        Pemberitahuan::where('rekrutmen_id', $id)->delete();
 
         $rekrutmen = Rekrutmen::find($id);
         File::delete(public_path('poster/' . $rekrutmen->poster));
