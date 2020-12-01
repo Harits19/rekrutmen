@@ -77,7 +77,6 @@
               </tbody>
             </table>
             {{ $pemberitahuan->links() }}
-            <a href="/admin/pendaftar/list/{{ Request::segment(4) }}/pemberitahuan" type="button" class="btn btn-primary">Kirim Pemberitahuan</a>
           </div>
         </div>
       </div>

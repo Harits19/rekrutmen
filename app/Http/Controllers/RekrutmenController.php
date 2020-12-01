@@ -50,29 +50,15 @@ class RekrutmenController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $request->validate([
             'organisasi_id' => 'required',
             'nama' => 'required',
             'deskripsi' => 'required',
             'poster' => 'required',
             'status' => 'required',
-
-
         ]);
 
-        //get next id
-        $next_id = DB::select("SHOW TABLE STATUS LIKE 'rekrutmen'");
-        $next_id = $next_id[0]->Auto_increment;
-
-        //upload file
-        $string_poster = $next_id . '.' . $request->poster->getClientOriginalExtension();
-        $request->poster->move(public_path('poster'), $string_poster);
-
-        // print_r($string_poster);
-
-        // filter jika terdapat data
+        // filter jika user membuat formulir
         if ($request->data_formulir != '') {
             $data_formulir = array_filter($request->data_formulir, 'strlen');
             $data_formulir = json_encode(array_values($data_formulir));
@@ -81,20 +67,23 @@ class RekrutmenController extends Controller
             $data_formulir = json_encode($data_formulir);
         }
 
-
-        Rekrutmen::create([
+        $id = Rekrutmen::insertGetId([
             'organisasi_id' => $request->organisasi_id,
             'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
-            'poster' => $string_poster,
             'status' => $request->status,
             'data_formulir' => $data_formulir,
         ]);
 
+        $string_poster = $id . '.' . $request->poster->getClientOriginalExtension();
+        $request->poster->move(public_path('poster'), $string_poster);
 
-        return redirect('admin/rekrutmen')->with('message', 'Data Berhasil input');
-        // return redirect()->back();
+        $rekrutmen = Rekrutmen::findOrFail($id);
+        $rekrutmen->update([
+            'poster' => $string_poster,
+        ]);
 
+        return redirect('admin/rekrutmen')->with('message', 'Data Berhasil Disimpan');
     }
 
     /**
@@ -136,11 +125,10 @@ class RekrutmenController extends Controller
             'status' => 'required',
         ]);
 
-        //get data Blog by ID
+        //get data Rekrutmen by ID
         $rekrutmen = Rekrutmen::findOrFail($id);
 
         if ($request->file('poster') == "") {
-
             $rekrutmen->update([
                 'organisasi_id' => $request->organisasi_id,
                 'nama' => $request->nama,
@@ -148,10 +136,8 @@ class RekrutmenController extends Controller
                 'status' => $request->status,
             ]);
         } else {
-
             //hapus old image
             File::delete(public_path('poster/' . $rekrutmen->poster));
-
 
             //upload new image
             $string_poster = $rekrutmen->id . '.' . $request->poster->getClientOriginalExtension();
@@ -167,10 +153,8 @@ class RekrutmenController extends Controller
         }
 
         if ($rekrutmen) {
-            //redirect dengan pesan sukses
             return redirect('admin/rekrutmen')->with(['message' => 'Data Berhasil Diupdate!']);
         } else {
-            //redirect dengan pesan error
             return redirect('admin/rekrutmen')->with(['message' => 'Data Gagal Diupdate!']);
         }
     }
@@ -195,7 +179,7 @@ class RekrutmenController extends Controller
         $rekrutmen = Rekrutmen::find($id);
         File::delete(public_path('poster/' . $rekrutmen->poster));
         Rekrutmen::destroy($id);
-        
+
         return redirect('admin/rekrutmen')->with('message', 'Berhasil Dihapus');
     }
 

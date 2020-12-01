@@ -31,17 +31,12 @@ class BerandaController extends Controller
 
     public function konfirmasi($kode)
     {
-
-        // print_r($code);
-        // $konfirmasi = Konfirmasi::where('kode', $kode)->get();
         $konfirmasi = Konfirmasi::where('kode', $kode);
-
 
         if ($konfirmasi->exists()) {
             $konfirmasi = $konfirmasi->get();
-            // print($konfirmasi[0]->pendaftar->nama);
 
-            $pendaftar = Pendaftar::findOrFail($konfirmasi[0]->pendaftar->id);
+            $pendaftar  = Pendaftar::findOrFail($konfirmasi[0]->pendaftar->id);
             $pendaftar->update([
                 'status' => 'hadir',
             ]);
@@ -99,20 +94,16 @@ class BerandaController extends Controller
 
     public function store(Request $request)
     {
-        # code...
         $request->validate([
-            'nama' => 'required',
-            'no_hp' => 'required',
-            'email' => 'required',
+            'nama'         => 'required',
+            'no_hp'        => 'required',
+            'email'        => 'required',
             'rekrutmen_id' => 'required',
-            'foto' => 'required',
-
-
+            'foto'         => 'required',
         ]);
 
         // merubah jenis data dari array ke json
         $data_formulir = json_encode($request->data_formulir);
-
 
         //get next id
         $next_id = DB::select("SHOW TABLE STATUS LIKE 'pendaftar'");
@@ -122,20 +113,16 @@ class BerandaController extends Controller
         $foto = $next_id . '.' . $request->foto->getClientOriginalExtension();
         $request->foto->move(storage_path('app/public/foto'), $foto);
 
-
         Pendaftar::create([
-            'nama' => $request->nama,
-            'rekrutmen_id' => $request->rekrutmen_id,
-            'no_hp' => $request->no_hp,
-            'email' => $request->email,
+            'nama'          => $request->nama,
+            'rekrutmen_id'  => $request->rekrutmen_id,
+            'no_hp'         => $request->no_hp,
+            'email'         => $request->email,
             'data_formulir' => $data_formulir,
-            'status' => '-',
-            'seleksi' => '-',
-            'foto' => $foto,
-
+            'status'        => '-',
+            'seleksi'       => '-',
+            'foto'          => $foto,
         ]);
-
-
 
         return redirect('/')->with('message', 'Data Berhasil Dikirim');
     }

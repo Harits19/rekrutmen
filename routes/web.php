@@ -64,7 +64,8 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->group(function
     Route::get('pendaftar/{id}/destroy', [PendaftarController::class, 'destroy']);
     Route::get('pendaftar/list/{id}', [PendaftarController::class, 'list']);
     Route::post('pendaftar/list/{id}/pemberitahuan', [PendaftarController::class, 'pemberitahuan']);
-    Route::post('pendaftar/list/{id}/pemberitahuan/kirim', [PendaftarController::class, 'kirim']);
+    // Route::post('pendaftar/list/{id}/pemberitahuan/kirim', [PendaftarController::class, 'kirim']);
+    Route::post('pendaftar/list/{id}/pemberitahuan/kirim', [PendaftarController::class, 'kirim2']);
     Route::get('pendaftar/list/{id}/unduh', [PendaftarController::class, 'unduh']);
     // Route::post('kirim', [PendaftarController::class, 'kirim']);
     

@@ -31,22 +31,21 @@ class PendaftarController extends Controller
         $pendaftar = Pendaftar::where('rekrutmen_id', $id)->get();
         File::makeDirectory(storage_path('biodata/temp/'));
 
-
         foreach ($pendaftar as $data) {
             $values = [];
 
             $data->rekrutmen->data_formulir = json_decode($data->rekrutmen->data_formulir);
-            $data->data_formulir = json_decode($data->data_formulir);
+            $data->data_formulir            = json_decode($data->data_formulir);
 
             foreach (array_combine($data->rekrutmen->data_formulir, $data->data_formulir) as $data_r => $data_p) {
                 array_push($values, ['key' => $data_r, 'value' => $data_p]);
             }
 
             $nama_rekrutmen = $data->rekrutmen->nama;
-            $nama = $data->nama;
-            $email = $data->email;
-            $no_hp = $data->no_hp;
-            $foto = $data->foto;
+            $nama           = $data->nama;
+            $email          = $data->email;
+            $no_hp          = $data->no_hp;
+            $foto           = $data->foto;
 
             $template = new \PhpOffice\PhpWord\TemplateProcessor(storage_path('biodata_pendaftar.docx'));
             $template->setValue('nama_rekrutmen', $nama_rekrutmen);
@@ -54,44 +53,31 @@ class PendaftarController extends Controller
             $template->setValue('email', $email);
             $template->setValue('no_hp', $no_hp);
             $template->setImageValue('foto', array('path' => storage_path('app/public/foto/' . $foto), 'width' => 120, 'height' => 150, 'ratio' => false));
-
             $template->cloneRowAndSetValues('key', $values);
             $filename = $data->id . ". " . $nama . ".docx";
-            // header('Content-Type: application/octet-stream');
-            // header("Content-Disposition: attachment; filename=$filename");
-            // $template->saveAs(storage_path('biodata/test.docx', true)); //untuk download langsung 
             $template->saveAs(storage_path('biodata/temp/' . $filename));
-            // break;
         }
-
 
         // //membuat zip file
         $zip_file = $pendaftar[0]->rekrutmen->nama . '.zip';
-        $zip = new \ZipArchive();
+        $zip      = new \ZipArchive();
         $zip->open(public_path('temp/' . $zip_file), \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
-
         $path = storage_path('biodata/temp');
         $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path));
 
-        $temp = null;
-
         foreach ($files as $name => $file) {
-            // We're skipping all subfolders
+            // Melewati sufolder
             if (!$file->isDir()) {
                 $filePath     = $file->getRealPath();
 
-                // extracting filename with substr/strlen
+                // mendapatkan nama file
                 $relativePath = 'biodata/' . substr($filePath, strlen($path) + 1);
-
                 $zip->addFile($filePath, $relativePath);
-                // $temp = $relativePath;
             }
         }
         $zip->close();
         File::deleteDirectory(storage_path('biodata/temp'));
 
-        // print_r($temp);
-        // die;
         return response()->download(public_path('temp/' . $zip_file));
     }
 
@@ -99,7 +85,6 @@ class PendaftarController extends Controller
     {
         $organisasi = Auth::user();
         $rekrutmen = Rekrutmen::where('organisasi_id', $organisasi->id)->orderBy('created_at', 'DESC')->withCount('pendaftar')->get();
-
         return view('admin.pendaftar', ['rekrutmen' => $rekrutmen]);
     }
 
@@ -169,31 +154,31 @@ class PendaftarController extends Controller
                 ->withInput();
         }
 
-
         if ($request->konfirmasi_kehadiran == "true") {
+
             foreach ($request->pendaftar as $pendaftar) {
+
                 $random_hash = bin2hex(random_bytes(32));
                 $pendaftar   = json_decode($pendaftar);
+
                 foreach ($request->layanan as $layanan) {
 
                     if ($layanan == 'whatsapp') {
-                        $pesan = $request->pesan . " http://rekrutmen.fia/konfirmasi/" . $random_hash;
-                        $ch = curl_init();
+                        $pesan   = $request->pesan . " http://rekrutmen.fia/konfirmasi/" . $random_hash;
+                        $ch      = curl_init();
                         curl_setopt($ch, CURLOPT_URL, 'https://api.autochat.id/api/message/send');
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                         curl_setopt($ch, CURLOPT_POST, 1);
                         $post = array(
-                            'phone' => $pendaftar->no_hp,
-                            'name' => 'Admin',
+                            'phone'   => $pendaftar->no_hp,
+                            'name'    => 'Admin',
                             'message' => $pesan,
                         );
                         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-
-                        $headers = array();
+                        $headers   = array();
                         $headers[] = 'X-Api-Key: 298606ffdd7a1349685a6d5c1558aa3033c4a19c';
                         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-                        $result = curl_exec($ch);
+                        $result    = curl_exec($ch);
                         if (curl_errno($ch)) {
                             echo 'Error:' . curl_error($ch);
                         }
@@ -206,17 +191,19 @@ class PendaftarController extends Controller
 
                     if ($layanan == 'sms') {
                         $pesan = $request->pesan . " http://rekrutmen.fia/konfirmasi/" . $random_hash;
+
+                        //belum diatur mengirim pesan yang panjangnya lebih dari 160 karakter https://blog.rosihanari.net/teknik-mengirim-long-text-sms-gammu-dengan-query-sql/
                         Smsd::create([
                             'DestinationNumber' => $pendaftar->no_hp,
-                            'TextDecoded' => $pesan,
-                            'CreatorID' => $id,
+                            'TextDecoded'       => $pesan,
+                            'CreatorID'         => $id,
                         ]);
                     }
                 }
                 //masukkan kode ke database
                 Konfirmasi::create([
                     'pendaftar_id' => $pendaftar->id,
-                    'kode' => $random_hash,
+                    'kode'         => $random_hash,
                 ]);
 
                 //update status pendaftar menjadi proses konfirmasi
@@ -228,20 +215,20 @@ class PendaftarController extends Controller
         } else {
             foreach ($request->layanan as $layanan) {
                 foreach ($request->pendaftar as $pendaftar) {
-                    $pendaftar = json_decode($pendaftar);
+                    $pendaftar   = json_decode($pendaftar);
                     if ($layanan == 'whatsapp') {
-                        $ch = curl_init();
+                        $ch      = curl_init();
                         curl_setopt($ch, CURLOPT_URL, 'https://api.autochat.id/api/message/send');
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                         curl_setopt($ch, CURLOPT_POST, 1);
                         $post = array(
-                            'phone' => $pendaftar->no_hp,
-                            'name' => 'Admin',
+                            'phone'   => $pendaftar->no_hp,
+                            'name'    => 'Admin',
                             'message' => $request->pesan,
                         );
                         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
-                        $headers = array();
+                        $headers   = array();
                         $headers[] = 'X-Api-Key: 298606ffdd7a1349685a6d5c1558aa3033c4a19c';
                         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -256,37 +243,124 @@ class PendaftarController extends Controller
                     if ($layanan == 'sms') {
                         Smsd::create([
                             'DestinationNumber' => $pendaftar->no_hp,
-                            'TextDecoded' => $request->pesan,
-                            'CreatorID' => $id,
+                            'TextDecoded'       => $request->pesan,
+                            'CreatorID'         => $id,
                         ]);
                     }
                 }
             }
         }
+
         // menyimpan data ke  tabel pemberitahuan
         $penerima = [];
-        $layanan = [];
+        $layanan  = [];
         foreach ($request->pendaftar as $pendaftar) {
-            // print_r($pendaftar);
             $pendaftar = json_decode($pendaftar);
-            // print_r($pendaftar->nama);
             array_push($penerima, $pendaftar->nama);
         }
         $penerima = array_filter($penerima, 'strlen');
         $penerima = json_encode(array_values($penerima));
-        $layanan = json_encode($request->layanan);
+        $layanan  = json_encode($request->layanan);
 
         ModelPemberitahuan::create([
             'rekrutmen_id' => $id,
-            'penerima' => $penerima,
-            'layanan' => $layanan,
-            'pesan' => $request->pesan,
+            'penerima'     => $penerima,
+            'layanan'      => $layanan,
+            'pesan'        => $request->pesan,
         ]);
-
 
         return redirect('/admin/pendaftar/list/' . $id)->with('message', 'Berhasil Mengirim');
     }
 
+    public function kirim2(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'pendaftar' => 'required',
+            'layanan' => 'required',
+            'pesan' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/admin/pendaftar/list/' . $id)
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $random_hash = "";
+        
+        foreach ($request->pendaftar as $pendaftar) {
+            $pendaftar   = json_decode($pendaftar);
+            if ($request->konfirmasi_kehadiran == "true") {
+                $random_hash = bin2hex(random_bytes(32));
+                $pesan   = $request->pesan . " http://rekrutmen.fia/konfirmasi/" . $random_hash;
+                
+                Konfirmasi::create([
+                    'pendaftar_id' => $pendaftar->id,
+                    'kode'         => $random_hash,
+                ]);
+                $pendaftar = Pendaftar::findOrFail($pendaftar->id);
+                $pendaftar->update([
+                    'status' => 'proses konfirmasi',
+                ]);
+            }else{
+                $pesan= $request->pesan;
+            }
+
+            foreach ($request->layanan as $layanan) {
+                if ($layanan == 'whatsapp') {
+                    $ch      = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, 'https://api.autochat.id/api/message/send');
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($ch, CURLOPT_POST, 1);
+                    $post = array(
+                        'phone'   => $pendaftar->no_hp,
+                        'name'    => 'Admin',
+                        'message' => $pesan,
+                    );
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+                    $headers   = array();
+                    $headers[] = 'X-Api-Key: 298606ffdd7a1349685a6d5c1558aa3033c4a19c';
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                    $result    = curl_exec($ch);
+                    if (curl_errno($ch)) {
+                        echo 'Error:' . curl_error($ch);
+                    }
+                }
+
+                if ($layanan == 'email') {
+                    Mail::to($pendaftar->email)->queue(new MailPemberitahuan($pendaftar, $pesan));
+                }
+
+                if ($layanan == 'sms') {
+                    //belum diatur mengirim pesan yang panjangnya lebih dari 160 karakter https://blog.rosihanari.net/teknik-mengirim-long-text-sms-gammu-dengan-query-sql/
+                    Smsd::create([
+                        'DestinationNumber' => $pendaftar->no_hp,
+                        'TextDecoded'       => $pesan,
+                        'CreatorID'         => $id,
+                    ]);
+                }
+            }
+        
+        }
+
+        // menyimpan data ke  tabel pemberitahuan
+        $penerima = [];
+        $layanan  = [];
+        foreach ($request->pendaftar as $pendaftar) {
+            $pendaftar = json_decode($pendaftar);
+            array_push($penerima, $pendaftar->nama);
+        }
+        $penerima = array_filter($penerima, 'strlen');
+        $penerima = json_encode(array_values($penerima));
+        $layanan  = json_encode($request->layanan);
+
+        ModelPemberitahuan::create([
+            'rekrutmen_id' => $id,
+            'penerima'     => $penerima,
+            'layanan'      => $layanan,
+            'pesan'        => $request->pesan,
+        ]);
+        return redirect('/admin/pendaftar/list/' . $id)->with('message', 'Berhasil Mengirim');
+    }
 
 
     /**
@@ -366,26 +440,25 @@ class PendaftarController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required',
-            'no_hp' => 'required',
-            'email' => 'required',
+            'nama'          => 'required',
+            'no_hp'         => 'required',
+            'email'         => 'required',
+            'data_formulir' => 'required',
         ]);
-        // Tambahkan jika dibutuhkan
-        // 'data_formulir' => 'required',
-        $pendaftar = Pendaftar::findOrFail($id);
+
+        //mencari data pendaftar yang mau di update
+        $pendaftar     = Pendaftar::findOrFail($id);
 
         // merubah jenis data dari array ke json
         $data_formulir = json_encode($request->data_formulir);
 
         $pendaftar->update([
-            'nama' => $request->nama,
-            'no_hp' => $request->no_hp,
-            'email' => $request->email,
-            'seleksi' => $request->seleksi,
+            'nama'          => $request->nama,
+            'no_hp'         => $request->no_hp,
+            'email'         => $request->email,
+            'seleksi'       => $request->seleksi,
             'data_formulir' => $data_formulir,
-
         ]);
-
 
         return redirect('/admin/pendaftar/list/' . $pendaftar->rekrutmen_id)->with('message', 'Berhasil Diupdate');
     }

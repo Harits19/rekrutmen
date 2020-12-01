@@ -3,6 +3,7 @@
 
 @section('content')
 <div class="col-lg-8 px-md-5 py-5">
+    @if($rekrutmen->status == "tersedia")
     <div class="col pt-md-4">
         <h1 class="mb-3">{{$rekrutmen->nama}}</h1>
         <p class="meta">
@@ -17,9 +18,11 @@
         <div class="half">
             <p><a href="/form/{{$rekrutmen->id}}" class="btn btn-primary p-3 px-xl-4 py-xl-3">&nbsp&nbspDaftar&nbsp&nbsp</a></p>
         </div>
-        
-        <p style="text-align: justify;text-justify: inter-word;">{{$rekrutmen->deskripsi}}</p>
+        <div class="col pt-md-4">
+            <p style="white-space: pre-wrap; ">{{$rekrutmen->deskripsi}}</p>
+        </div>
 
     </div><!-- END-->
+    @endif
 </div>
 @endsection
