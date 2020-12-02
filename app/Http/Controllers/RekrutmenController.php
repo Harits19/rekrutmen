@@ -183,6 +183,31 @@ class RekrutmenController extends Controller
         return redirect('admin/rekrutmen')->with('message', 'Berhasil Dihapus');
     }
 
+    public function destroy_rev($id)
+    {
+        // menghapus data pendaftar yang where rekrutmen_id = id
+        $rekrutmen = Rekrutmen::find($id);
+        $pendaftar = Pendaftar::where('rekrutmen_id', $id)->get();
+
+
+        if (!$rekrutmen->exists()) {
+            return redirect('admin/rekrutmen')->with('message', 'Gagal Dihapus');
+        }
+
+        foreach ($pendaftar as $pendaftar) {
+            File::delete(storage_path('app/public/foto/' . $pendaftar->foto));
+            Pendaftar::destroy($pendaftar->id);
+        }
+        
+        Pemberitahuan::where('rekrutmen_id', $id)->delete();
+        File::delete(public_path('poster/' . $rekrutmen->poster));
+        Rekrutmen::destroy($id);
+
+        return redirect('admin/rekrutmen')->with('message', 'Berhasil Dihapus');
+    }
+
+
+
     public function test()
     {
 

@@ -106,14 +106,14 @@ class BerandaController extends Controller
         $data_formulir = json_encode($request->data_formulir);
 
         //get next id
-        $next_id = DB::select("SHOW TABLE STATUS LIKE 'pendaftar'");
-        $next_id = $next_id[0]->Auto_increment;
+        // $next_id = DB::select("SHOW TABLE STATUS LIKE 'pendaftar'");
+        // $next_id = $next_id[0]->Auto_increment;
 
         //upload file
-        $foto = $next_id . '.' . $request->foto->getClientOriginalExtension();
-        $request->foto->move(storage_path('app/public/foto'), $foto);
+        // $foto = $next_id . '.' . $request->foto->getClientOriginalExtension();
+        // $request->foto->move(storage_path('app/public/foto'), $foto);
 
-        Pendaftar::create([
+        $id = Pendaftar::insertGetId([
             'nama'          => $request->nama,
             'rekrutmen_id'  => $request->rekrutmen_id,
             'no_hp'         => $request->no_hp,
@@ -121,7 +121,13 @@ class BerandaController extends Controller
             'data_formulir' => $data_formulir,
             'status'        => '-',
             'seleksi'       => '-',
-            'foto'          => $foto,
+        ]);
+
+        $foto = $id . '.' . $request->foto->getClientOriginalExtension();
+        $request->foto->move(storage_path('app/public/foto'), $foto);
+        $pendaftar = Pendaftar::findOrFail($id);
+        $pendaftar->update([
+            'foto' => $foto,
         ]);
 
         return redirect('/')->with('message', 'Data Berhasil Dikirim');

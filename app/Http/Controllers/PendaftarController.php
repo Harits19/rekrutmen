@@ -8,11 +8,13 @@ use App\Models\Konfirmasi;
 use App\Models\Pendaftar;
 use App\Models\Rekrutmen;
 use App\Models\Smsd;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
+
 // use GuzzleHttp\Client;
 
 
@@ -286,13 +288,13 @@ class PendaftarController extends Controller
                 ->withInput();
         }
         $random_hash = "";
-        
+
         foreach ($request->pendaftar as $pendaftar) {
             $pendaftar   = json_decode($pendaftar);
             if ($request->konfirmasi_kehadiran == "true") {
                 $random_hash = bin2hex(random_bytes(32));
                 $pesan   = $request->pesan . " http://rekrutmen.fia/konfirmasi/" . $random_hash;
-                
+
                 Konfirmasi::create([
                     'pendaftar_id' => $pendaftar->id,
                     'kode'         => $random_hash,
@@ -301,8 +303,8 @@ class PendaftarController extends Controller
                 $pendaftar->update([
                     'status' => 'proses konfirmasi',
                 ]);
-            }else{
-                $pesan= $request->pesan;
+            } else {
+                $pesan = $request->pesan;
             }
 
             foreach ($request->layanan as $layanan) {
@@ -339,7 +341,6 @@ class PendaftarController extends Controller
                     ]);
                 }
             }
-        
         }
 
         // menyimpan data ke  tabel pemberitahuan
@@ -475,5 +476,16 @@ class PendaftarController extends Controller
         File::delete(storage_path('app/public/foto/' . $pendaftar->foto));
         Pendaftar::destroy($id);
         return back()->with('message', 'Berhasil Dihapus');
+    }
+
+    public function destroy_rev($id)
+    {
+        try {
+            File::delete(storage_path('app/public/foto/' . $pendaftar->foto));
+            Pendaftar::destroy($id);
+            return back()->with('message', 'Berhasil Dihapus');
+        } catch (Exception $exc) {
+            return redirect('/admin/rekrutmen/')->with('message', 'Gagal Dihapus');
+        }
     }
 }
