@@ -78,7 +78,7 @@
                     </label>
                 </div>
                 <br> <br>
-                <button id="submit" href="" type="submit" class="btn btn-primary">Kirim Pemberitahuan</button>
+                <button id="submit" href="" type="submit" class="btn btn-primary" onclick="return confirm('Apakah anda yakin?')">Kirim Pemberitahuan</button>
 
             </form>
         </div>

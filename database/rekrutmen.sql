@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 27 Nov 2020 pada 09.27
+-- Waktu pembuatan: 11 Des 2020 pada 06.03
 -- Versi server: 5.7.24
 -- Versi PHP: 7.4.12
 
@@ -156,14 +156,8 @@ CREATE TABLE `konfirmasi` (
 --
 
 INSERT INTO `konfirmasi` (`id`, `pendaftar_id`, `kode`, `created_at`, `updated_at`) VALUES
-(72, 1, '5f38be84e857498c1c4995b46fd8e2439c8a4d9726ded8ee60470f1ca8bc7d5c', '2020-11-26 08:54:01', '2020-11-26 08:54:01'),
-(73, 3, '3d15dee26dc4a79baebdd918d32b676c68735655e4ecad93ff5741fe595e2231', '2020-11-26 08:54:04', '2020-11-26 08:54:04'),
-(74, 6, '1094ab8dc91a29bfa9d1c48c70e7abad0c3924ee647789b3365130b1a1a38bb6', '2020-11-26 09:24:52', '2020-11-26 09:24:52'),
-(75, 8, '046cb98f522cfce6a1640e7e7db7ca7d862db9aedff97e2f1ccb3c0498fe1a0c', '2020-11-26 09:25:00', '2020-11-26 09:25:00'),
-(76, 1, '6f8a83ecbea84b19ecbd4ceb6dfe6e55ab8cb9186084face2d08020c4936a4a3', '2020-11-26 09:45:40', '2020-11-26 09:45:40'),
-(77, 1, '24effebbf127aff53fcf3aaf562f60f32f5a0f30f4e42d4ea136e07c9182c2a2', '2020-11-26 15:44:42', '2020-11-26 15:44:42'),
-(78, 1, '60f9f9c0f7913ca23f53b8cd5f6226e4102cc211f1024bc50b3d4e12fe82391e', '2020-11-26 15:46:32', '2020-11-26 15:46:32'),
-(79, 1, 'eb00bd1f344aba62c168024c760639b5ac4903d1cf0419db249e279e8fbb48c0', '2020-11-26 15:48:58', '2020-11-26 15:48:58');
+(94, 2, '516c6b7e551161831cf2f1c4a7ebb21a8d807edab01272de08f7cd740db98ebc', '2020-12-01 11:16:24', '2020-12-01 11:16:24'),
+(95, 3, '3431dba47d77925f450eb41eadd0b52f16cfc710e31b4fd0ab0a80aa59696ecd', '2020-12-01 11:16:31', '2020-12-01 11:16:31');
 
 -- --------------------------------------------------------
 
@@ -228,11 +222,7 @@ CREATE TABLE `organisasi` (
 --
 
 INSERT INTO `organisasi` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(23, 'abdullah harits', 'ruwucucak@gmail.com', NULL, '$2y$10$UJrxTBTyxAaUXX97RMEiXuxkpEs/KEtGQt5eUf5/vAT7HMMJ1nHyO', NULL, NULL, 'oAChd01c6Z8TDn36PNX3FTc1DlFC2rYb80RKtEwAjZG02Sn0GvWsjBqKfnCJ', NULL, NULL, '2020-11-02 03:51:24', '2020-11-02 05:15:17'),
-(24, 'abdullah test', 'admin@mail.com', NULL, '$2y$10$8kDhqyngw5iHaLyWXyWO5.fbb5lh9yHiQ7z0Gx15hnBkuTiZsPcuy', NULL, NULL, 'hmnRqnpmecKZj8FYwsPAesDpkrmN3SlbCI6wpl6mW8rFcUin6kxtOZactIQP', NULL, NULL, '2020-11-02 05:53:14', '2020-11-03 22:06:07'),
-(25, 'abdullah harits', 'rkimubofficial@gmail.com', NULL, '$2y$10$/JgR.eNGdPW3nARMikBAZuLXxOqjsGzQTeEg/4C2d1HdP9O2QHNry', NULL, NULL, NULL, NULL, NULL, '2020-11-03 23:12:18', '2020-11-03 23:12:18'),
-(26, 'aa', 'asdad@sadad.com4', NULL, '$2y$10$PHP6QcTcIe0PTLWYJnyAle5pwNXZoS1uPjo305avKPTKziVU3ls76', NULL, NULL, NULL, NULL, NULL, '2020-11-03 23:12:59', '2020-11-03 23:12:59'),
-(27, 'Baru', 'baru@gmail.com', NULL, '$2y$10$7Xfm.VfHvrtKZ6oLUy74UebM6.2EkMiNfyol6COCC7Bp1raoAeL16', NULL, NULL, 'YIbjwoJltC3hidmhlNoHcwwO1Ku8SiXM6s6qeejn6aQm62eywi9jjSrA6pcl', NULL, NULL, '2020-11-09 20:25:22', '2020-11-09 20:58:21');
+(24, 'Mahasiswa Wirausaha', 'admin@mail.com', NULL, '$2y$10$8kDhqyngw5iHaLyWXyWO5.fbb5lh9yHiQ7z0Gx15hnBkuTiZsPcuy', NULL, NULL, 'G2JC0pj5xLHDgDml5KaXvchxMQ2umxD43flqxgPfXqNoOLfYXP9uJUFULpng', NULL, NULL, '2020-11-02 05:53:14', '2020-11-03 22:06:07');
 
 -- --------------------------------------------------------
 
@@ -319,16 +309,6 @@ CREATE TABLE `pemberitahuan` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data untuk tabel `pemberitahuan`
---
-
-INSERT INTO `pemberitahuan` (`id`, `rekrutmen_id`, `penerima`, `layanan`, `pesan`, `created_at`, `updated_at`) VALUES
-(1, 84, '[\"member\"]', '[\"sms\"]', 'Tes', '2020-11-26 09:45:40', '2020-11-26 09:45:40'),
-(2, 84, '[\"member\"]', '[\"whatsapp\", \"email\"]', 'Ini tes', '2020-11-26 15:44:43', '2020-11-26 15:44:43'),
-(3, 84, '[\"member\"]', '[\"whatsapp\", \"email\"]', 'INi halo test', '2020-11-26 15:46:32', '2020-11-26 15:46:32'),
-(4, 84, '[\"member\"]', '[\"whatsapp\"]', 'test', '2020-11-26 15:48:58', '2020-11-26 15:48:58');
-
 -- --------------------------------------------------------
 
 --
@@ -341,7 +321,7 @@ CREATE TABLE `pendaftar` (
   `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `no_hp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `data_formulir` json NOT NULL,
   `status` enum('-','Proses Konfirmasi','Hadir') COLLATE utf8mb4_unicode_ci NOT NULL,
   `seleksi` enum('-','Diterima','Tidak Diterima') COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -354,7 +334,9 @@ CREATE TABLE `pendaftar` (
 --
 
 INSERT INTO `pendaftar` (`id`, `rekrutmen_id`, `nama`, `no_hp`, `email`, `foto`, `data_formulir`, `status`, `seleksi`, `created_at`, `updated_at`) VALUES
-(1, 84, 'member', '0895614730905', 'ruwucucak@gmail.com', '1.jpg', '[\"Malang\", \"Malang\", \"213123\"]', 'Proses Konfirmasi', '-', '2020-11-26 09:45:00', '2020-11-26 15:48:58');
+(2, 89, 'Abdullah Harits', '0895614730905', 'harits.abdullah19@gmail.com', '2.jpg', '[\"Lowokwaru\", \"Ingin Belajar\", \"@harits19\"]', '-', '-', '2020-12-01 01:49:56', '2020-12-02 20:41:34'),
+(3, 89, 'Ahmad Hafidz', '0895341785757', 'harits.abdullah19@gmail.com', '3.jpg', '[\"Kabupaten Malang\", \"Ingin Belajar\", \"@hafidz19\"]', '-', '-', '2020-12-01 01:51:02', '2020-12-01 11:16:31'),
+(4, 89, 'Ahmad Hanif', '08170427182', 'harits.abdullah19@gmail.com', '4.jpg', '[\"Tlogomas\", \"Ingin Belajar\", \"@hanif19\"]', '-', '-', '2020-12-01 01:52:05', '2020-12-01 02:42:36');
 
 -- --------------------------------------------------------
 
@@ -421,9 +403,7 @@ CREATE TABLE `rekrutmen` (
 --
 
 INSERT INTO `rekrutmen` (`id`, `organisasi_id`, `nama`, `deskripsi`, `poster`, `data_formulir`, `status`, `created_at`, `updated_at`) VALUES
-(84, 24, 'hafid', 'akakaka', '84.jpg', '[\"Haloo\",\"Test\",\"nilai\"]', 'tersedia', '2020-11-09 07:13:12', '2020-11-09 07:13:12'),
-(86, 24, '1', 'Halo Bandunf', '86.jpg', '[\"1\",\"3\",\"5\"]', 'tersedia', '2020-11-09 07:16:28', '2020-11-09 07:16:28'),
-(87, 24, 'Test', 'test', '87.jpg', 'null', 'tersedia', '2020-11-14 08:39:04', '2020-11-14 08:39:04');
+(89, 24, 'OPEN RECRUITMENT UKM MAHASISWA WIRAUSAHA UB 2020', '✨OPEN RECRUITMENT UKM MAHASISWA WIRAUSAHA UB 2020✨\r\n\r\nHello Youngpreneur!🤗\r\n\r\nKamu mahasiswa Universitas Brawijaya?\r\nApakah tertarik untuk memulai bisnis?\r\nAtau kalian udah punya bisnis tapi bingung cara ngembanginnya?\r\nMau menambah relasi yang memiliki jiwa entrepreneur?\r\n\r\nJika jawabannya IYA, maka kamu adalah orang yang tepat yang kami cari!\r\n\r\nUKM Mahasiswa Wirausaha UB, hadir sebagai wadah bagi mahasiswa Universitas Brawijaya yang tertarik dengan dunia wirausaha dan mendorong serta membekali kalian menjadi seorang entrepreneur yang hebat.\r\n\r\nKarena menjadi entrepreneur yang hebat tak lepas dari niat yang kuat dan usaha yang giat untuk menyempurnakan proses menjadi wirausahawan muda yang sukses. So, yuk join MW untuk menggapai kesuksesan kalian dimasa muda!\r\n\r\nLangsung aja simak informasi singkat mengenai #OpenRecruitmentMW2020 :\r\n\r\n🗓 : 5–25 Oktober 2020\r\n💰 : FREE!\r\n🔗 : bit.ly/oprecMW2020 (link on bio)\r\n*Informasi lengkap tertera pada poster\r\n\r\nWe can’t wait to welcome our new family members. See you next youngpreneur!🤗✨\r\n\r\nMore Information:\r\nInstagram: @mw_brawijaya\r\n\r\nContact Person:\r\n📲Rere (line: rerecamila)\r\n📲Valdy (line: valdypampanga)\r\n\r\nMahasiswa Wirausaha, To Be Great Entrepreneur!\r\n—————————————————————\r\nWebsite : mw.ub.ac.id\r\nLine : @mw_brawijaya\r\nInstagram : MW_Brawijaya\r\nTwitter : @MW_Brawijaya\r\nYoutube : Mahasiswa Wirausaha\r\nSpotify : Cakap Cakep MW\r\nSekret : Gedung UKM lantai 4 nomer 6\r\n—————————————————————\r\n#MW2020\r\n#OprecMW\r\n#MahasiswaWirausahaUB\r\n#OpenRecruitmentMW2020\r\n#BeAPartofMW\r\n#KabinetHarmoni\r\n#MW\r\n#MahasiswaWirausaha\r\n#ToBeGreatEntrepreneur', '89.jpg', '[\"Alamat di Malang\",\"Motivasi\",\"ID Line\"]', 'tersedia', '2020-12-01 01:20:39', '2020-12-01 01:28:11');
 
 -- --------------------------------------------------------
 
@@ -474,21 +454,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('5T9URgsZoA9lS7Tv27PcPTyYB6GYeV0MpRstlPMz', 24, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiUEtRSzQ4Z1h6QzBIcnJIbHh4R2tKSU5pUjNpTk5PV1U0djZtRTh0WCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTM6Imh0dHA6Ly9yZWtydXRtZW4uZmlhL2FkbWluL3BlbmRhZnRhci9saXN0L2Zhdmljb24uaWNvIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjQ7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCQ4a0RocXluZ3c1aUhhTHlXWHlXTzUuZmJiNWxoOXlIaVE3ejBHeDE1aG5Ca3VUaVpzUGN1eSI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkOGtEaHF5bmd3NWlIYUx5V1h5V081LmZiYjVsaDl5SGlRN3owR3gxNWhuQmt1VGlac1BjdXkiO30=', 1606409140),
-('9q0PXaJfLSqZ5I5PUjzhNkDh2wThBA7uV5nmx3I5', NULL, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 10; M2004J19C) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.99 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQ0JaRVFKQW5GcG5SMnRiUW1wdGVpSFFTeGdxU3VqcnJhWWN5TGh1eCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9mMTk4YzM1NzE5ZmUuYXAubmdyb2suaW8iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1606426415),
-('d1tCtDcNTqcITPOkxWl9RO53cxSeg4fV55yYsEuR', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoialNhdWdkR0F4eWUxOFlLRTBtSTg5YVNOdWdCT0w2WG1zQkhkMHd4diI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly81ZGMzNjU3NWE1MTcubmdyb2suaW8vcmVrcnV0bWVuL3B1YmxpYyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1606425337),
-('ESbGLn25hbFLxDzXGqQQUeeRboQVB5wv6lkZNh6n', NULL, '127.0.0.1', 'WhatsApp/2.20.205.16 A', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoidXdtZjR1T3oxcFFRNWFxVGhpZDU4Smt3M1pqQ0w2NEhmaXRNZ0JRZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9hMTQ4ODU3MDEzODkuYXAubmdyb2suaW8iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1606426540),
-('hCKwKHlujt9ReiUFeCozkzgXEmnQgjlD9O6R4UJr', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMHFpZTFqUmcyNWkzZnlFcVNXdHNzeXlkYkp4Njh0SzQzZHNkMkRKQiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly81MWY4YjVjMjgxYWIuYXAubmdyb2suaW8iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1606426272),
-('HENZ0ZDeRd2h6qLyjGXI7uFK3FzWCIdvYiZz5lGj', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoidU9ONGp5QnhkdFp0eFFDQnhDUE9SVjZkY2lXdFpXVE5kaU1IdW14QiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjA6Imh0dHA6Ly9yZWtydXRtZW4uZmlhIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1606425738),
-('Khn4Nn9L4PrJIJSrEJ3D5gRkJ72utmmMzVDN9B6Q', 24, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiZktoVzZPeGxWZmkwNlk4RDFiN3FaRzFpR2xHRnpSZXVwVU85SDZVcCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NjE6Imh0dHA6Ly9lYjc4YTQzMGMxZmYuYXAubmdyb2suaW8vYWRtaW4vcGVuZGFmdGFyL2xpc3QvODQvdW5kdWgiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyNDtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEwJDhrRGhxeW5ndzVpSGFMeVdYeVdPNS5mYmI1bGg5eUhpUTd6MEd4MTVobkJrdVRpWnNQY3V5IjtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCQ4a0RocXluZ3c1aUhhTHlXWHlXTzUuZmJiNWxoOXlIaVE3ejBHeDE1aG5Ca3VUaVpzUGN1eSI7fQ==', 1606431216),
-('leRcYSJuDteo2f6D1BrQjOgvwNwkdfWODlwLpgUP', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUG4zSU1QR3dGWkdkaTFKT3JGb3NHU1I2bVhBaURWQ3FNbUphc3U3MiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly9lYTc5ZTQxNzhkMzQubmdyb2suaW8iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1606425845),
-('MhiBUJ3ooH36XOg8DC28H5NwU62QsVjXaPDIscBa', NULL, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 7.0; Moto C Plus) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOWhzdU5JaVpkZThlbmJZbnQ0QnpoMXIwemJ5QzNVNktLNEZldU5LNCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9mMTk4YzM1NzE5ZmUuYXAubmdyb2suaW8iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1606426419),
-('P5oEQhqLZqouTNjrL2oq7NiSUIdftBWw5RHLOFE1', NULL, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 10; M2004J19C) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.99 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoib21jN2Y3TDVCdTF2ZTBsQTllM05heEloZnFhY1dWcEd2TDlqeVkyaCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly81MWY4YjVjMjgxYWIuYXAubmdyb2suaW8iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1606426308),
-('pYMmQHsqnv44tfVqVa8c3QaIUzLXTlPBZVPWPgT4', NULL, '127.0.0.1', 'WhatsApp/2.20.205.16 A', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVTBjbVQ0ZmNYMDhXOGtzd1lCRThyM0ZvSGlGWUVtQWpaT0YydmdoOCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly81MWY4YjVjMjgxYWIuYXAubmdyb2suaW8iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1606426304),
-('sdECEIvmwsOrVXWi78QK4Jp2UoFHAbzM7jUoo4NZ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTHdreTJVMGIxY3dWSXFFcDBBT3JVMHF0UlFoenhhdWprT2tPZHNTQyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly9yZWtydXRtZW4uZmlhL2xvZ2luIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1606462862),
-('sRClFTCSl6seBupOYoYD7x72V1iLygod5fLnBenJ', NULL, '127.0.0.1', 'WhatsApp/2.20.205.16 A', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRTRhZmRqQjBiSG01ZlFIenlnOHZFQXRWeTdzQkFvZWJGWkM0SlVneCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9mMTk4YzM1NzE5ZmUuYXAubmdyb2suaW8iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1606426401),
-('vNjuVeffH7HwDQFmlYaO3ofQ86h8GdcpiBEr7FF8', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOG5IRW9yaThlano0TWhTV0lrNm5qZklqNjNGZm5mQ1BXTzVoa3NacyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1606425499),
-('z9cXW95lA9eZhdjXPHe3fPqV9qw8xEhwa4AgBVMG', NULL, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 7.0; Moto C Plus) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiS2loNmk2MUZ0U2ZkTDhLNHRYS3NhMmI5Y2NySVpXRW5qcjBTUkpuUyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly9hMTQ4ODU3MDEzODkuYXAubmdyb2suaW8iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1606426666);
+('MydQ0ak4FatotKckbIx7dmuAyKYccK032VYbKZgh', 24, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiQ3JFblh4YUY1NVJpV3VBak5MUEpsRm1sQ2Fja2x0ejBET3VTQXlnUiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHA6Ly9yZWtydXRtZW4uZmlhL2FkbWluL3Jla3J1dG1lbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI0O3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkOGtEaHF5bmd3NWlIYUx5V1h5V081LmZiYjVsaDl5SGlRN3owR3gxNWhuQmt1VGlac1BjdXkiO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJDhrRGhxeW5ndzVpSGFMeVdYeVdPNS5mYmI1bGg5eUhpUTd6MEd4MTVobkJrdVRpWnNQY3V5Ijt9', 1607665568);
 
 --
 -- Indexes for dumped tables
@@ -659,7 +625,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT untuk tabel `konfirmasi`
 --
 ALTER TABLE `konfirmasi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
@@ -671,7 +637,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `organisasi`
 --
 ALTER TABLE `organisasi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `outbox`
@@ -683,13 +649,13 @@ ALTER TABLE `outbox`
 -- AUTO_INCREMENT untuk tabel `pemberitahuan`
 --
 ALTER TABLE `pemberitahuan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `pendaftar`
 --
 ALTER TABLE `pendaftar`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
@@ -701,7 +667,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT untuk tabel `rekrutmen`
 --
 ALTER TABLE `rekrutmen`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

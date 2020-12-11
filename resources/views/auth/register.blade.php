@@ -10,7 +10,7 @@
     <div class="row pt-md-4">
 
         <form method="POST" action="{{ route('register') }}">
-        @csrf
+            @csrf
             <div class="card-body card-block">
                 <div>
                     <small> Isilah Data Dibawah Ini </small> <strong>Dengan Benar</strong>

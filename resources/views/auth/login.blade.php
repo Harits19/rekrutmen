@@ -7,14 +7,15 @@
     <h6>Halaman login untuk organisasi</h6>
     <br>
     @if (session('status'))
-    <div class="mb-4 font-medium text-sm text-green-600">
+    <div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
         {{ session('status') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     @endif
-
     <x-jet-validation-errors class="mb-4" />
     <div class="row pt-md-4">
-
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="card-body card-block">
@@ -67,9 +68,9 @@
 
 
 
-    <div class="col-lg-6 d-flex">
+    <!-- <div class="col-lg-6 d-flex">
         <div id="map" class="bg-light"></div>
-    </div>
+    </div> -->
 </div>
 
 @endsection
